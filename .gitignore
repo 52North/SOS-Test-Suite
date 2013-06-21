@@ -1,0 +1,9 @@
+**/.classpath
+**/.settings
+**/.project
+**/target
+**/nb-*.xml
+.project
+.settings
+.classpath
+nb-*.xml
