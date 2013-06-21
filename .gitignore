@@ -1,7 +1,7 @@
 **/.classpath
 **/.settings
 **/.project
-**/target
+**/target/
 **/nb-*.xml
 .project
 .settings

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.n52</groupId>
@@ -8,13 +8,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.n52.sensorweb.sos</groupId>
-    <artifactId>52n-sos-common-parent</artifactId>
+    <artifactId>test-suite</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>52North SOS Integration and Compliance Tests</name>
-    <description>52North SOS Integration and Compliance</description>
-    <inceptionYear>2012</inceptionYear>
+    <name>52North SOS Integration and Compliance Test Suite</name>
+    <inceptionYear>2013</inceptionYear>
     <packaging>pom</packaging>
     <modules>
+        <module>common</module>
         <module>sos-100</module>
         <module>sos-20</module>
     </modules>
