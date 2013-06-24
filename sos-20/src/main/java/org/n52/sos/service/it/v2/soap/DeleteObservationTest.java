@@ -64,7 +64,8 @@ public class DeleteObservationTest extends AbstractSosV2SoapTest {
         DeleteObservationDocument deleteObservationDocument =
                 getRequest("observation");
         addVersionParameter(deleteObservationDocument.getDeleteObservation());
-        invalidServiceParameter(deleteObservationDocument.getDeleteObservation(), deleteObservationDocument);
+        invalidServiceParameter(deleteObservationDocument.getDeleteObservation(),
+                                deleteObservationDocument);
     }
 
     protected DeleteObservationDocument getRequest(String observation) {
