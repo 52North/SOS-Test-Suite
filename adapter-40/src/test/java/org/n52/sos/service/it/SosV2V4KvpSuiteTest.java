@@ -23,9 +23,9 @@
  */
 package org.n52.sos.service.it;
 
-import org.n52.sos.service.it.v2.SosV2KvpSuite;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
+import org.n52.sos.service.it.v2.SosV2KvpSuite;
 import org.n52.sos.service.it.v40.H2Database;
 import org.n52.sos.service.it.v40.SOS40Executor;
 

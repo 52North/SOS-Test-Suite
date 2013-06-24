@@ -48,8 +48,9 @@
         </license>
     </licenses>
     <properties>
-        <xml-common-version>1.1.4</xml-common-version>
-        <sos4-version>4.0.0-Beta3-SNAPSHOT</sos4-version>
+        <xml.common.version>1.1.4</xml.common.version>
+        <sos4.version>4.0.0-Beta3-SNAPSHOT</sos4.version>
+        <spring.version>3.1.2.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <logback.version>1.0.0</logback.version>
         <slf4j.version>1.7.2</slf4j.version>
@@ -84,7 +85,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>3.1.2.RELEASE</version>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -96,49 +102,49 @@
             <dependency>
                 <groupId>org.n52.sensorweb</groupId>
                 <artifactId>52n-xml-soap-v12</artifactId>
-                <version>${xml-common-version}</version>
+                <version>${xml.common.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb</groupId>
                 <artifactId>52n-xml-gml-v321</artifactId>
-                <version>${xml-common-version}</version>
+                <version>${xml.common.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb</groupId>
                 <artifactId>52n-xml-ows-v110</artifactId>
-                <version>${xml-common-version}</version>
+                <version>${xml.common.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb</groupId>
                 <artifactId>52n-xml-swes-v20</artifactId>
-                <version>${xml-common-version}</version>
+                <version>${xml.common.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb</groupId>
                 <artifactId>52n-xml-sos-v20</artifactId>
-                <version>${xml-common-version}</version>
+                <version>${xml.common.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb</groupId>
                 <artifactId>52n-xml-sensorML-v101</artifactId>
-                <version>${xml-common-version}</version>
+                <version>${xml.common.version}</version>
             </dependency>
 
             <!-- SOS 4.0.0 dependencies -->
             <dependency>
                 <groupId>org.n52.sensorweb.sos</groupId>
                 <artifactId>api</artifactId>
-                <version>${sos4-version}</version>
+                <version>${sos4.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb.sos</groupId>
                 <artifactId>hibernate-common</artifactId>
-                <version>${sos4-version}</version>
+                <version>${sos4.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb.sos</groupId>
                 <artifactId>hibernate-h2</artifactId>
-                <version>${sos4-version}</version>
+                <version>${sos4.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb.sos</groupId>
