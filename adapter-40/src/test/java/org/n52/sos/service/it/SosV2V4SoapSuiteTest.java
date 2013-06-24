@@ -23,16 +23,50 @@
  */
 package org.n52.sos.service.it;
 
-import org.n52.sos.service.it.v2.SosV2SoapSuite;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
+import org.n52.sos.service.it.v2.soap.DeleteObservationTest;
+import org.n52.sos.service.it.v2.soap.DeleteSensorTest;
+import org.n52.sos.service.it.v2.soap.DescribeSensorTest;
+import org.n52.sos.service.it.v2.soap.GetCapabilitiesTest;
+import org.n52.sos.service.it.v2.soap.GetDataAvailabilityTest;
+import org.n52.sos.service.it.v2.soap.GetFeatureOfInterestTest;
+import org.n52.sos.service.it.v2.soap.GetObservationByIdTest;
+import org.n52.sos.service.it.v2.soap.GetObservationTest;
+import org.n52.sos.service.it.v2.soap.GetResultTemplateTest;
+import org.n52.sos.service.it.v2.soap.GetResultTest;
+import org.n52.sos.service.it.v2.soap.InsertObservationTest;
+import org.n52.sos.service.it.v2.soap.InsertResultTemplateTest;
+import org.n52.sos.service.it.v2.soap.InsertResultTest;
+import org.n52.sos.service.it.v2.soap.InsertSensorTest;
+import org.n52.sos.service.it.v2.soap.UpdateSensorDescriptionTest;
 import org.n52.sos.service.it.v40.H2Database;
 import org.n52.sos.service.it.v40.SOS40Executor;
 
 @RunWith(ComplianceSuiteRunner.class)
-public class SosV2V4SoapSuiteTest extends SosV2SoapSuite {
+public class SosV2V4SoapSuiteTest {
     @Rule
     public final H2Database database = new H2Database();
+
+    public Class<?>[] getTests() {
+        return new Class<?>[] {
+            DeleteObservationTest.class,
+            DeleteSensorTest.class,
+            DescribeSensorTest.class,
+            GetCapabilitiesTest.class,
+            GetDataAvailabilityTest.class,
+            GetFeatureOfInterestTest.class,
+            GetObservationByIdTest.class,
+            GetObservationTest.class,
+            GetResultTemplateTest.class,
+            GetResultTest.class,
+            InsertObservationTest.class,
+            InsertResultTemplateTest.class,
+            InsertResultTest.class,
+            InsertSensorTest.class,
+            UpdateSensorDescriptionTest.class
+        };
+    }
 
     public RequestExecutor createExecutor() {
         return new SOS40Executor();
