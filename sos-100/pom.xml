@@ -10,4 +10,10 @@
     <artifactId>test-suite-sos-100</artifactId>
     <name>52North SOS Integration and Compliance 1.0.0</name>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>test-suite-common</artifactId>
+        </dependency>
+    </dependencies>
 </project>
