@@ -73,6 +73,11 @@ public class ComplianceSuiteTestRunner extends BlockJUnit4ClassRunner {
         return rules;
     }
 
+    @Override
+    protected String testName(FrameworkMethod method) {
+        return getTestClass().getName() + "#" + method.getName();
+    }
+
     private class RequestExecutorRule extends ExternalResource {
         @Override
         protected void before() throws Throwable {
