@@ -44,10 +44,11 @@ import org.n52.sos.service.it.v40.H2Database;
 import org.n52.sos.service.it.v40.SOS40Executor;
 
 @RunWith(ComplianceSuiteRunner.class)
-public class SosV2V4SoapSuiteTest {
+public class SosV2V4SoapSuiteTest implements ComplianceSuite {
     @Rule
     public final H2Database database = new H2Database();
 
+    @Override
     public Class<?>[] getTests() {
         return new Class<?>[] {
             DeleteObservationTest.class,
@@ -68,6 +69,7 @@ public class SosV2V4SoapSuiteTest {
         };
     }
 
+    @Override
     public RequestExecutor createExecutor() {
         return new SOS40Executor();
     }

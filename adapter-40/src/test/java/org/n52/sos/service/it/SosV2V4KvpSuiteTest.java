@@ -44,10 +44,11 @@ import org.n52.sos.service.it.v40.SOS40Executor;
  * @author Christian Autermann <c.autermann@52north.org>
  */
 @RunWith(ComplianceSuiteRunner.class)
-public class SosV2V4KvpSuiteTest {
+public class SosV2V4KvpSuiteTest implements ComplianceSuite {
     @Rule
     public final H2Database database = new H2Database();
 
+    @Override
     public Class<?>[] getTests() {
         return new Class<?>[] {
             DeleteObservationTest.class,
@@ -63,6 +64,7 @@ public class SosV2V4KvpSuiteTest {
         };
     }
 
+    @Override
     public RequestExecutor createExecutor() {
         return new SOS40Executor();
     }
