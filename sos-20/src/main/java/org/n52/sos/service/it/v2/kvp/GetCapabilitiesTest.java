@@ -52,7 +52,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
     @Test
     @Override
     public void missingServiceParameter() {
-        Node node = getExecutor().get("/kvp")
+        Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .asResponse().asNode();
         assertThat(node, hasXPath(CAPABILITIES));
@@ -61,7 +61,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
     @Test
     @Override
     public void emptyServiceParameter() {
-        Node node = getExecutor().get("/kvp")
+        Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, "")
                 .asResponse().asNode();
@@ -71,7 +71,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
     @Test
     @Override
     public void invalidServiceParameter() {
-        Node node = getExecutor().get("/kvp")
+        Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, "INVALID")
                 .asResponse().asNode();
@@ -99,7 +99,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
     @Test
     @Ignore
     public void emptySectionParameter() {
-        Node node = getExecutor().get("/kvp")
+        Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, SERVICE)
                 .query(SosConstants.GetCapabilitiesParams.Sections, "")
@@ -112,7 +112,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
 
     @Test
     public void invalidSectionParameter() {
-        Node node = getExecutor().get("/kvp")
+        Node node = kvp()
                 .query(OWSConstants.RequestParams.request, SosConstants.Operations.GetCapabilities)
                 .query(OWSConstants.RequestParams.service, SosConstants.SOS)
                 .query(SosConstants.GetCapabilitiesParams.Sections, "INVALID")
@@ -172,7 +172,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
     }
 
     protected Element getCapabilities() {
-        return getExecutor().get("/kvp")
+        return kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, SERVICE)
                 .asResponse().asNode();
