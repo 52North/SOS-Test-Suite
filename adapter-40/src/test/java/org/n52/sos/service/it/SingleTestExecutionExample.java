@@ -21,34 +21,28 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.service.it.v40;
+package org.n52.sos.service.it;
 
-import org.n52.sos.service.SosService;
-import org.n52.sos.service.it.Client;
-import org.n52.sos.service.it.MockHttpServletExecutor;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.rules.RuleChain;
+import org.n52.sos.service.it.v2.soap.GetObservationTest;
+import org.n52.sos.service.it.v40.H2Database;
+import org.n52.sos.service.it.v40.SOS40Executor;
 
 /**
- * TODO JavaDoc
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SOS40Executor extends MockHttpServletExecutor {
-    public SOS40Executor() {
-        super(SosService.class);
-    }
+@Ignore("Just an example...")
+public class SingleTestExecutionExample extends GetObservationTest {
+    private final SOS40Executor executor = new SOS40Executor();
+    @Rule
+    public final RuleChain rc = RuleChain
+            .outerRule(new H2Database())
+            .around(executor);
 
     @Override
-    public Client kvp() {
-        return get("/kvp");
-    }
-
-    @Override
-    public Client pox() {
-        return post("/pox");
-    }
-
-    @Override
-    public Client soap() {
-        return post("/soap");
+    public RequestExecutor getExecutor() {
+        return executor;
     }
 }

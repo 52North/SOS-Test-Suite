@@ -27,6 +27,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 
+import org.junit.rules.ExternalResource;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 
@@ -36,7 +37,9 @@ import org.springframework.mock.web.MockServletContext;
  * J&uuml;rrens</a>
  * @author Carsten Hollmann <c.hollmann@52north.org>
  */
-public abstract class MockHttpServletExecutor implements RequestExecutor {
+public abstract class MockHttpServletExecutor
+        extends ExternalResource
+        implements RequestExecutor {
     public static final String ENCODING = "UTF-8";
     private final ServletFactory servletFactory;
     private final ServletContext servletContext =
