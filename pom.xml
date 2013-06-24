@@ -20,10 +20,25 @@
         <module>adapter-35</module>
         <module>adapter-40</module>
     </modules>
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/52North/SOS-Test-Suite</url>
+    </ciManagement>
+    <scm>
+        <url>http://github.com/52North/SOS-Test-Suite</url>
+        <connection>scm:git:ssh://github.com/52North/SOS-Test-Suite.git</connection>
+        <developerConnection>scm:git:git+ssh://git@github.com/52North/SOS-Test-Suite.git</developerConnection>
+    </scm>
     <issueManagement>
-        <system>Bugzilla</system>
-        <url>https://bugzilla.52north.org/</url>
+        <system>GitHub Issue Management</system>
+        <url>https://github.com/52North/SOS-Test-Suite/issues</url>
     </issueManagement>
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>gitsite:git@github.com/52North/SOS-Test-Suite.git</url>
+        </site>
+    </distributionManagement>
     <licenses>
         <license>
             <name>GPLv2</name>
