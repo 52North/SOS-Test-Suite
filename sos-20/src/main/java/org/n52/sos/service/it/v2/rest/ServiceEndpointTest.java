@@ -24,7 +24,6 @@
 package org.n52.sos.service.it.v2.rest;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,11 +44,13 @@ public class ServiceEndpointTest extends RestBindingTest {
         final Response response2 = get(REST_URL + "/")
                 .accept(CONTENT_TYPE).asResponse();
 
-        assertThat(response.getStatus(), is(HttpServletResponse.SC_SEE_OTHER));
-        assertThat(response.getHeader("Location"), endsWith(REST_URL +
-                                                            "/capabilities"));
-        assertThat(response2.getStatus(), is(HttpServletResponse.SC_SEE_OTHER));
-        assertThat(response2.getHeader("Location"), endsWith(REST_URL +
-                                                             "/capabilities"));
+        getErrors().checkThat(response.getStatus(),
+                              is(HttpServletResponse.SC_SEE_OTHER));
+        getErrors().checkThat(response.getHeader("Location"),
+                              endsWith(REST_URL + "/capabilities"));
+        getErrors().checkThat(response2.getStatus(),
+                              is(HttpServletResponse.SC_SEE_OTHER));
+        getErrors().checkThat(response2.getHeader("Location"),
+                              endsWith(REST_URL + "/capabilities"));
     }
 }

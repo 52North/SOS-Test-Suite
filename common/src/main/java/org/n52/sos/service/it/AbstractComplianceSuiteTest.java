@@ -23,6 +23,9 @@
  */
 package org.n52.sos.service.it;
 
+import org.junit.Rule;
+import org.junit.rules.ErrorCollector;
+
 /**
  * TODO JavaDoc
  *
@@ -30,6 +33,7 @@ package org.n52.sos.service.it;
  */
 public abstract class AbstractComplianceSuiteTest implements ComplianceSuiteTest {
     private RequestExecutor executor;
+    private final ErrorCollector errors = new ErrorCollector();
 
     public RequestExecutor getExecutor() {
         return executor;
@@ -58,5 +62,10 @@ public abstract class AbstractComplianceSuiteTest implements ComplianceSuiteTest
 
     public Client head(String path) {
         return executor.head(path);
+    }
+
+    @Rule
+    public ErrorCollector getErrors() {
+        return errors;
     }
 }

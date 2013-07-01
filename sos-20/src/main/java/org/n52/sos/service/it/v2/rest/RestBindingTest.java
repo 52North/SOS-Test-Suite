@@ -93,15 +93,12 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
 
     protected String link(final String relType,
                           final String resTypeWithOrWithoutId) {
-        return "sosREST:link[" +
-               "@rel='" + REST_CONFIG.getEncodingNamespace() + "/" + relType +
-               "'" +
-               " and " +
-               "@href='" + REST_CONFIG.getServiceUrl() + REST_URL + "/" +
-               resTypeWithOrWithoutId + "'" +
-               " and " +
-               "@type='" + CONTENT_TYPE + "'" +
-               "]";
+        return String
+                .format("sosRest:link[@rel='%s' and @href='%s' and @type='%s']",
+                        REST_CONFIG.getEncodingNamespace() + "/" + relType,
+                        REST_CONFIG.getServiceUrl() + REST_URL + "/" +
+                        resTypeWithOrWithoutId,
+                        CONTENT_TYPE);
     }
 
     protected Response getResource(final String resType) {
@@ -127,11 +124,9 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
                 .setIdentifications(createIdentifications(sensorId, offeringId))
                 .addCapabilities(new SmlCapabilities("InsertionMetadata",
                                                      new SweSimpleDataRecord()
-                .addField(new SweField("sos:ObservationType",
-                                       new SweText()
+                .addField(new SweField("sos:ObservationType", new SweText()
                 .setValue("http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement")))
-                .addField(new SweField("sos:FeatureOfInterestType",
-                                       new SweText()
+                .addField(new SweField("sos:FeatureOfInterestType", new SweText()
                 .setValue("http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint")))))
                 .setIdentifier(sensorId);
         final SystemType xbSystem = (SystemType) new SensorMLEncoderv101()
@@ -259,8 +254,8 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
     }
 
     protected String sensorLink(final String sensorId1) {
-        return link(REST_CONFIG.getResourceRelationSensorGet(), REST_CONFIG
-                .getResourceSensors() + "/" + sensorId1);
+        return link(REST_CONFIG.getResourceRelationSensorGet(),
+                    REST_CONFIG.getResourceSensors() + "/" + sensorId1);
     }
 
     protected Response addMeasurement(final String sensorId,

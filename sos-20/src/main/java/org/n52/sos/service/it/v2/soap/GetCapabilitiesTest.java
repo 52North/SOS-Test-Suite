@@ -24,7 +24,6 @@
 package org.n52.sos.service.it.v2.soap;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.*;
 
 import net.opengis.sos.x20.GetCapabilitiesDocument;
@@ -53,7 +52,7 @@ public class GetCapabilitiesTest extends AbstractSosV2SoapTest {
         getCapabilitiesType.addNewAcceptVersions().addNewVersion()
                 .setStringValue(Sos2Constants.SERVICEVERSION);
         Response res = soap(getCapabilitiesDocument);
-        assertThat(res.getStatus(), is(200));
+        getErrors().checkThat(res.getStatus(), is(200));
         // TODO check if response is a sos:Capabilities document
     }
 
@@ -68,8 +67,9 @@ public class GetCapabilitiesTest extends AbstractSosV2SoapTest {
                 .setStringValue(Sos2Constants.SERVICEVERSION);
         getCapabilitiesType.setService("");
         Response res = soap(getCapabilitiesDocument);
-        assertThat(res.getStatus(), is(400));
-        assertThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
+        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors()
+                .checkThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
     }
 
     @Test
@@ -82,7 +82,8 @@ public class GetCapabilitiesTest extends AbstractSosV2SoapTest {
                 .setStringValue(Sos2Constants.SERVICEVERSION);
         getCapabilitiesType.setService("INVALID");
         Response res = soap(getCapabilitiesDocument);
-        assertThat(res.getStatus(), is(400));
-        assertThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
+        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors()
+                .checkThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
     }
 }

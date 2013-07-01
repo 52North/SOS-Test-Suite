@@ -21,7 +21,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-
 package org.n52.sos.service.it.v2.soap;
 
 import net.opengis.om.x20.OMObservationType;
@@ -35,58 +34,70 @@ import net.opengis.swe.x20.TextEncodingType;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
-import org.n52.sos.ogc.sos.Sos2Constants;
-import org.n52.sos.ogc.sos.SosConstants;
-import org.n52.sos.util.XmlOptionsHelper;
-import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
  * Test for SOAP SOS 2.0 InsertResultTemplate request.
- * 
+ *
  * @author Christian Autermann <c.autermann@52north.org>
  * @author Carsten Hollmann <c.hollmann@52north.org>
  * @since 4.0.0
  */
 public class InsertResultTemplateTest extends AbstractSosV2SoapTest {
-
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        InsertResultTemplateDocument insertResultTemplateDocument = getMinimalRequest();
-        addVersionParameter(insertResultTemplateDocument.getInsertResultTemplate());
-        missingServiceParameter(insertResultTemplateDocument.getInsertResultTemplate(), insertResultTemplateDocument);
+        InsertResultTemplateDocument insertResultTemplateDocument =
+                getMinimalRequest();
+        addVersionParameter(insertResultTemplateDocument
+                .getInsertResultTemplate());
+        missingServiceParameter(insertResultTemplateDocument
+                .getInsertResultTemplate(), insertResultTemplateDocument);
     }
 
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        InsertResultTemplateDocument insertResultTemplateDocument = getMinimalRequest();
-        addVersionParameter(insertResultTemplateDocument.getInsertResultTemplate());
-        emptyServiceParameter(insertResultTemplateDocument.getInsertResultTemplate(), insertResultTemplateDocument);
+        InsertResultTemplateDocument insertResultTemplateDocument =
+                getMinimalRequest();
+        addVersionParameter(insertResultTemplateDocument
+                .getInsertResultTemplate());
+        emptyServiceParameter(insertResultTemplateDocument
+                .getInsertResultTemplate(), insertResultTemplateDocument);
     }
 
     @Test
+    @Override
     public void invalidServiceParameter() throws XmlException {
-        InsertResultTemplateDocument insertResultTemplateDocument = getMinimalRequest();
-        addVersionParameter(insertResultTemplateDocument.getInsertResultTemplate());
-        invalidServiceParameter(insertResultTemplateDocument.getInsertResultTemplate(), insertResultTemplateDocument);
+        InsertResultTemplateDocument insertResultTemplateDocument =
+                getMinimalRequest();
+        addVersionParameter(insertResultTemplateDocument
+                .getInsertResultTemplate());
+        invalidServiceParameter(insertResultTemplateDocument
+                .getInsertResultTemplate(), insertResultTemplateDocument);
     }
 
     protected TextEncodingDocument createTextEncoding() {
-        TextEncodingDocument textEncodingDocument = TextEncodingDocument.Factory.newInstance();
-        TextEncodingType textEncodingType = textEncodingDocument.addNewTextEncoding();
+        TextEncodingDocument textEncodingDocument = TextEncodingDocument.Factory
+                .newInstance();
+        TextEncodingType textEncodingType = textEncodingDocument
+                .addNewTextEncoding();
         textEncodingType.setTokenSeparator(",");
         textEncodingType.setBlockSeparator(";");
         return textEncodingDocument;
     }
 
     protected InsertResultTemplateDocument getMinimalRequest() {
-        InsertResultTemplateDocument insertResultTemplateDocument = InsertResultTemplateDocument.Factory.newInstance();
-        InsertResultTemplateType insertResultTemplateType = insertResultTemplateDocument.addNewInsertResultTemplate();
-        ProposedTemplate proposedTemplate = insertResultTemplateType.addNewProposedTemplate();
-        ResultTemplateType resultTemplate = proposedTemplate.addNewResultTemplate();
+        InsertResultTemplateDocument insertResultTemplateDocument =
+                InsertResultTemplateDocument.Factory.newInstance();
+        InsertResultTemplateType insertResultTemplateType =
+                insertResultTemplateDocument.addNewInsertResultTemplate();
+        ProposedTemplate proposedTemplate = insertResultTemplateType
+                .addNewProposedTemplate();
+        ResultTemplateType resultTemplate = proposedTemplate
+                .addNewResultTemplate();
         resultTemplate.setOffering("offering");
-        OMObservationType observationType = resultTemplate.addNewObservationTemplate().addNewOMObservation();
+        OMObservationType observationType = resultTemplate
+                .addNewObservationTemplate().addNewOMObservation();
         observationType.setId("id");
         observationType.addNewPhenomenonTime().setNilReason("template");
         observationType.addNewResultTime().setHref("#");
@@ -96,7 +107,8 @@ public class InsertResultTemplateTest extends AbstractSosV2SoapTest {
         observationType.addNewResult();
         TextEncodingDocument textEncodingDocument = createTextEncoding();
         resultTemplate.addNewResultEncoding().set(textEncodingDocument);
-        DataRecordDocument dataRecordDocument = DataRecordDocument.Factory.newInstance();
+        DataRecordDocument dataRecordDocument = DataRecordDocument.Factory
+                .newInstance();
         dataRecordDocument.addNewDataRecord().addNewField().setName("field");
         resultTemplate.addNewResultStructure().set(dataRecordDocument);
         return insertResultTemplateDocument;

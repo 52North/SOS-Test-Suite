@@ -67,6 +67,7 @@ public class UpdateSensorDescriptionTest extends AbstractSosV2SoapTest {
     }
 
     @Test
+    @Override
     public void invalidServiceParameter() throws XmlException {
         UpdateSensorDescriptionDocument updateSensorDescriptionDocument =
                 getMinimalRequest();

@@ -29,7 +29,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.n52.sos.service.it.Response;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.w3c.dom.Node;
 
 /**
@@ -41,13 +40,13 @@ import org.w3c.dom.Node;
 public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_return_status_okay() {
-        final MockHttpServletResponse response = getCapabilities();
+        final Response response = getCapabilities();
         assertThat(response.getStatus(), is(SC_OK));
     }
 
     @Test
     public void should_return_correct_content_type() {
-        final MockHttpServletResponse response = getCapabilities();
+        final Response response = getCapabilities();
         assertThat(response.getContentType(), is(CONTENT_TYPE));
     }
 
@@ -78,7 +77,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_self_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationSelf(), REST_CONFIG
                 .getResourceCapabilities()), NS_CTXT));
@@ -87,7 +85,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_offerings_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationOfferingsGet(), REST_CONFIG
                 .getResourceOfferings()), NS_CTXT));
@@ -96,7 +93,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_features_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationFeaturesGet(), REST_CONFIG
                 .getResourceFeatures()), NS_CTXT));
@@ -105,7 +101,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_sensor_create_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationSensorCreate(), REST_CONFIG
                 .getResourceSensors()), NS_CTXT));
@@ -114,7 +109,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_sensors_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationSensorsGet(), REST_CONFIG
                 .getResourceSensors()), NS_CTXT));
@@ -123,7 +117,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_observation_create_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationObservationCreate(), REST_CONFIG
                 .getResourceObservations()), NS_CTXT));
@@ -132,7 +125,6 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_observation_link() {
         final Node response = getCapabilities().asNode();
-
         assertThat(response, hasXPath(capabilitiesLink(REST_CONFIG
                 .getResourceRelationObservationGet(), REST_CONFIG
                 .getResourceObservations()), NS_CTXT));

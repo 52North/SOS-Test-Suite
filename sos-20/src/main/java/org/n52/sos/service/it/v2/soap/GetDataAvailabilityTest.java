@@ -24,7 +24,6 @@
 package org.n52.sos.service.it.v2.soap;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.*;
 
 import org.apache.xmlbeans.XmlException;
@@ -61,8 +60,9 @@ public class GetDataAvailabilityTest extends AbstractSosV2SoapTest {
                 XmlObject.Factory
                 .parse("<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" service=\"\" version=\"2.0.0\"/>");
         Response res = soap(getDataAvailabilityDocument);
-        assertThat(res.getStatus(), is(400));
-        assertThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
+        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors()
+                .checkThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
     }
 
     @Test
@@ -73,7 +73,8 @@ public class GetDataAvailabilityTest extends AbstractSosV2SoapTest {
                 XmlObject.Factory
                 .parse("<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" service=\"INVALID\" version=\"2.0.0\"/>");
         Response res = soap(getDataAvailabilityDocument);
-        assertThat(res.getStatus(), is(400));
-        assertThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
+        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors()
+                .checkThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
     }
 }

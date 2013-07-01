@@ -34,7 +34,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.service.it.Response;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.w3c.dom.Node;
 
 /**
@@ -46,32 +45,28 @@ import org.w3c.dom.Node;
 public class OfferingsTest extends RestBindingTest {
     @Test
     public void should_return_status_ok() {
-        final MockHttpServletResponse response = getOfferings();
-
+        final Response response = getOfferings();
         assertThat(response.getStatus(), is(SC_OK));
     }
 
     @Test
     public void should_return_correct_content_type() {
-        final MockHttpServletResponse response = getOfferings();
-
+        final Response response = getOfferings();
         assertThat(response.getContentType(), is(CONTENT_TYPE));
     }
 
     @Test
     public void should_return_valid_sosRest_offeringslist() {
         final Node response = getOfferings().asNode();
-
-        assertThat(response, hasXPath("//sosREST:OfferingCollection", NS_CTXT));
-        assertThat(response, hasXPath(selfLink(REST_CONFIG
-                .getResourceOfferings()), NS_CTXT));
+        assertThat(response, allOf(
+                hasXPath("//sosREST:OfferingCollection", NS_CTXT),
+                hasXPath(selfLink(REST_CONFIG.getResourceOfferings()), NS_CTXT)));
     }
 
     @Test
     public void should_contain_self_link() {
-        final Node xbResponse = getOfferings().asNode();
-
-        assertThat(xbResponse, hasXPath(offeringsLink(REST_CONFIG
+        final Node response = getOfferings().asNode();
+        assertThat(response, hasXPath(offeringsLink(REST_CONFIG
                 .getResourceRelationSelf(), REST_CONFIG.getResourceOfferings()), NS_CTXT));
     }
 

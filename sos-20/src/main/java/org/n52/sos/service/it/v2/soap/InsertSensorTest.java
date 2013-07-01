@@ -60,6 +60,7 @@ public class InsertSensorTest extends AbstractSosV2SoapTest {
     }
 
     @Test
+    @Override
     public void invalidServiceParameter() throws XmlException {
         final InsertSensorDocument insertSensorDocument =
                 RequestBuilder.getInsertSensorMinimalDocument();
