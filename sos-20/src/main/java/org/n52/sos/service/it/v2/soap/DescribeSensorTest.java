@@ -70,9 +70,9 @@ public class DescribeSensorTest extends AbstractSosV2SoapTest {
                 DescribeSensorDocument.Factory.newInstance();
         DescribeSensorType describeSensorType = describeSensorDocument
                 .addNewDescribeSensor();
-        describeSensorType.setProcedure("procedure");
+        describeSensorType.setProcedure(procedure);
         describeSensorType
-                .setProcedureDescriptionFormat("procedureDescriptionFormat");
+                .setProcedureDescriptionFormat(procedureDescriptionFormat);
         return describeSensorDocument;
     }
 }
