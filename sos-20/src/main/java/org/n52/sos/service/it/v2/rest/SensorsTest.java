@@ -24,17 +24,16 @@
 package org.n52.sos.service.it.v2.rest;
 
 import static org.hamcrest.Matchers.*;
-import static org.n52.sos.service.it.v2.rest.RestBindingTest.REST_CONFIG;
 
 import java.io.UnsupportedEncodingException;
 
 import net.opengis.sosREST.x10.SensorDocument;
 
 import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlObject;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
+import org.n52.sos.service.it.Response;
 import org.w3c.dom.Node;
 
 /**
@@ -49,20 +48,21 @@ public class SensorsTest extends RestBindingTest {
             throws UnsupportedEncodingException, XmlException,
                    OwsExceptionReport {
         final String sensorId = "test-sensor-id";
-        final Node response = addSensor(sensorId, "test-offering-id").asNode();
-        final XmlObject xbResponse = XmlObject.Factory.parse(response);
-        getErrors().checkThat(xbResponse, instanceOf(SensorDocument.class));
-        getErrors().checkThat(response,
+        Response response = addSensor(sensorId, "test-offering-id");
+        getErrors().checkThat(response.asXmlObject(),
+                              instanceOf(SensorDocument.class));
+        final Node node = response.asNode();
+        getErrors().checkThat(node,
                               hasXPath("//sosREST:Sensor/sml:System", NS_CTXT));
-        getErrors().checkThat(response, hasXPath(selfLink(REST_CONFIG
+        getErrors().checkThat(node, hasXPath(selfLink(getConstants()
                 .getResourceSensors(), sensorId), NS_CTXT));
-        getErrors().checkThat(response, hasXPath(link(REST_CONFIG
-                .getResourceRelationFeaturesGet(), REST_CONFIG
-                .getResourceFeatures() + "?" + REST_CONFIG
+        getErrors().checkThat(node, hasXPath(link(getConstants()
+                .getResourceRelationFeaturesGet(), getConstants()
+                .getResourceFeatures() + "?" + getConstants()
                 .getHttpGetParameterNameProcedure() + "=" + sensorId), NS_CTXT));
-        getErrors().checkThat(response, hasXPath(link(REST_CONFIG
-                .getResourceRelationObservationsGet(), REST_CONFIG
-                .getResourceObservations() + "?" + REST_CONFIG
+        getErrors().checkThat(node, hasXPath(link(getConstants()
+                .getResourceRelationObservationsGet(), getConstants()
+                .getResourceObservations() + "?" + getConstants()
                 .getHttpGetParameterNameProcedure() + "=" + sensorId), NS_CTXT));
     }
 
@@ -76,12 +76,12 @@ public class SensorsTest extends RestBindingTest {
         addSensor(sensorId2, "test-offering-2");
 
         final Node response =
-                getResource(REST_CONFIG.getResourceSensors()).asNode();
+                getResource(getConstants().getResourceSensors()).asNode();
 
         getErrors().checkThat(response,
                               hasXPath("//sosREST:SensorCollection", NS_CTXT));
         getErrors().checkThat(response,
-                              hasXPath(selfLink(REST_CONFIG
+                              hasXPath(selfLink(getConstants()
                 .getResourceSensors()), NS_CTXT));
         getErrors().checkThat(response,
                               hasXPath(sensorLink(sensorId1), NS_CTXT));
@@ -96,12 +96,12 @@ public class SensorsTest extends RestBindingTest {
         final String sensorId = "sensor-1";
         addSensor(sensorId, "test-offering-1");
         final Node responseBeforeDelete =
-                getResource(REST_CONFIG.getResourceSensors()).asNode();
-        delete(REST_URL + "/" + REST_CONFIG.getResourceSensors() + "/" +
+                getResource(getConstants().getResourceSensors()).asNode();
+        delete(REST_URL + "/" + getConstants().getResourceSensors() + "/" +
                sensorId).accept(CONTENT_TYPE).contentType(CONTENT_TYPE)
                 .execute();
         final Node responseAfterDelete =
-                getResource(REST_CONFIG.getResourceSensors()).asNode();
+                getResource(getConstants().getResourceSensors()).asNode();
 
         getErrors().checkThat(responseBeforeDelete,
                               hasXPath(sensorLink(sensorId), NS_CTXT));

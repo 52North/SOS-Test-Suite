@@ -67,7 +67,6 @@ import org.n52.sos.ogc.swe.simpleType.SweAbstractSimpleType;
 import org.n52.sos.ogc.swe.simpleType.SweObservableProperty;
 import org.n52.sos.ogc.swe.simpleType.SweQuantity;
 import org.n52.sos.ogc.swe.simpleType.SweText;
-import org.n52.sos.service.Configurator;
 import org.n52.sos.service.ServiceConfiguration;
 import org.n52.sos.service.it.AbstractComplianceSuiteTest;
 import org.n52.sos.service.it.Response;
@@ -86,17 +85,13 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
     protected static final String REST_URL = "/rest";
     protected static final String CONTENT_TYPE = "application/gml+xml";
     protected static final NamespaceContext NS_CTXT = new SosNamespaceContext();
-    protected static final Constants REST_CONFIG = Constants.getInstance();
-    protected static final Configurator SOS_CONFIG = Configurator.getInstance();
-    protected static final ServiceConfiguration SERVICE_CONFIG =
-            ServiceConfiguration.getInstance();
 
     protected String link(final String relType,
                           final String resTypeWithOrWithoutId) {
         return String
-                .format("sosRest:link[@rel='%s' and @href='%s' and @type='%s']",
-                        REST_CONFIG.getEncodingNamespace() + "/" + relType,
-                        REST_CONFIG.getServiceUrl() + REST_URL + "/" +
+                .format("sosREST:link[@rel='%s' and @href='%s' and @type='%s']",
+                        getConstants().getEncodingNamespace() + "/" + relType,
+                        getConstants().getServiceUrl() + REST_URL + "/" +
                         resTypeWithOrWithoutId,
                         CONTENT_TYPE);
     }
@@ -117,7 +112,8 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
                                       final String offeringId) throws
             OwsExceptionReport {
         final System system = (System) new System()
-                .setPosition(new SmlPosition("test-sensor-position", true, SERVICE_CONFIG
+                .setPosition(new SmlPosition("test-sensor-position", true, ServiceConfiguration
+                .getInstance()
                 .getSrsNamePrefixSosV2() + 4326, createCoordinates(52.0, 7.5, 42.0)))
                 .setInputs(createInputList("test-observable-property"))
                 .setOutputs(createOutputList("test-observable-property"))
@@ -170,10 +166,12 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
         restObservation.setOMObservation(xbObservation);
         final LinkType link = restObservation.addNewLink();
         link.setType(CONTENT_TYPE);
-        link.setRel(REST_CONFIG.getEncodingNamespace() + "/" + REST_CONFIG
+        link.setRel(getConstants().getEncodingNamespace() + "/" + getConstants()
                 .getResourceRelationOfferingGet());
-        link.setHref(REST_CONFIG.getServiceUrl() + REST_CONFIG.getUrlPattern() +
-                     "/" + REST_CONFIG.getResourceOfferings() + "/" + offeringId);
+        link.setHref(getConstants().getServiceUrl() + getConstants()
+                .getUrlPattern() +
+                     "/" + getConstants().getResourceOfferings() + "/" +
+                     offeringId);
         return restObsDoc.xmlText();
     }
 
@@ -234,7 +232,7 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
     protected Response addSensor(final String sensorId,
                                  final String offeringId)
             throws OwsExceptionReport {
-        return post(REST_URL + "/" + REST_CONFIG.getResourceSensors())
+        return post(REST_URL + "/" + getConstants().getResourceSensors())
                 .accept(CONTENT_TYPE)
                 .contentType(CONTENT_TYPE)
                 .entity(createRestSensor(sensorId, offeringId))
@@ -247,15 +245,17 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
 
     protected String selfLink(final String resType,
                               final String resourceId) {
-        return link(REST_CONFIG.getResourceRelationSelf(), resType +
-                                                           (resourceId != null
-                                                            ? "/" + resourceId
-                                                            : ""));
+        return link(getConstants().getResourceRelationSelf(), resType +
+                                                              (resourceId !=
+                                                               null
+                                                               ? "/" +
+                                                                 resourceId
+                                                               : ""));
     }
 
     protected String sensorLink(final String sensorId1) {
-        return link(REST_CONFIG.getResourceRelationSensorGet(),
-                    REST_CONFIG.getResourceSensors() + "/" + sensorId1);
+        return link(getConstants().getResourceRelationSensorGet(),
+                    getConstants().getResourceSensors() + "/" + sensorId1);
     }
 
     protected Response addMeasurement(final String sensorId,
@@ -265,11 +265,15 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
                                       final String featureId,
                                       final String observableProperty)
             throws OwsExceptionReport {
-        return post(REST_URL + "/" + REST_CONFIG
+        return post(REST_URL + "/" + getConstants()
                 .getResourceObservations())
                 .accept(CONTENT_TYPE)
                 .contentType(CONTENT_TYPE)
                 .entity(createRestMeasurement(sensorId, offeringId, timestamp, value, featureId, observableProperty))
                 .asResponse();
+    }
+
+    protected Constants getConstants() {
+        return Constants.getInstance();
     }
 }

@@ -60,14 +60,15 @@ public class OfferingsTest extends RestBindingTest {
         final Node response = getOfferings().asNode();
         assertThat(response, allOf(
                 hasXPath("//sosREST:OfferingCollection", NS_CTXT),
-                hasXPath(selfLink(REST_CONFIG.getResourceOfferings()), NS_CTXT)));
+                hasXPath(selfLink(getConstants().getResourceOfferings()), NS_CTXT)));
     }
 
     @Test
     public void should_contain_self_link() {
         final Node response = getOfferings().asNode();
-        assertThat(response, hasXPath(offeringsLink(REST_CONFIG
-                .getResourceRelationSelf(), REST_CONFIG.getResourceOfferings()), NS_CTXT));
+        assertThat(response, hasXPath(offeringsLink(getConstants()
+                .getResourceRelationSelf(), getConstants()
+                .getResourceOfferings()), NS_CTXT));
     }
 
     @Test
@@ -90,6 +91,6 @@ public class OfferingsTest extends RestBindingTest {
     }
 
     private Response getOfferings() {
-        return getResource(REST_CONFIG.getResourceOfferings());
+        return getResource(getConstants().getResourceOfferings());
     }
 }

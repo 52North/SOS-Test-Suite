@@ -30,10 +30,13 @@ import static org.hamcrest.Matchers.nullValue;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.xmlbeans.XmlException;
+import org.apache.xmlbeans.XmlObject;
 import org.junit.Assert;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.w3c.dom.Element;
@@ -54,6 +57,11 @@ public class Response extends MockHttpServletResponse {
         Assert.assertThat(response, is(not(nullValue())));
         Assert.assertThat(response.length, is(not(0)));
         return new ByteArrayInputStream(response);
+    }
+
+    public XmlObject asXmlObject() throws XmlException,
+                                          UnsupportedEncodingException {
+        return XmlObject.Factory.parse(getContentAsString());
     }
 
     public Element asNode() {
