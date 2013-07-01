@@ -54,6 +54,7 @@ public abstract class MockHttpServletExecutor
 
     public MockHttpServletExecutor(final Class<? extends HttpServlet> klass) {
         this.servletFactory = new ServletFactory() {
+            @Override
             public HttpServlet create() {
                 try {
                     return klass.newInstance();
