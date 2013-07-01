@@ -50,6 +50,7 @@
     <properties>
         <xml.common.version>1.1.4</xml.common.version>
         <do.version>0.1.1-SNAPSHOT</do.version>
+        <rest.version>0.1.1-SNAPSHOT</rest.version>
         <sos4.version>4.0.0-Beta3-SNAPSHOT</sos4.version>
         <spring.version>3.1.2.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -151,6 +152,16 @@
                 <groupId>org.n52.sensorweb.sos</groupId>
                 <artifactId>do-xml</artifactId>
                 <version>${do.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.n52.sensorweb.sos</groupId>
+                <artifactId>rest-xml</artifactId>
+                <version>${rest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.n52.sensorweb.sos</groupId>
+                <artifactId>rest-code</artifactId>
+                <version>${rest.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.n52.sensorweb.sos</groupId>

@@ -40,4 +40,6 @@ public interface Client {
     Client query(String key, Enum<?> value);
 
     Response asResponse();
+
+    void execute();
 }

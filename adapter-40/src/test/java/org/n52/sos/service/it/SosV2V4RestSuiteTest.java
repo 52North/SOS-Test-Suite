@@ -23,40 +23,32 @@
  */
 package org.n52.sos.service.it;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <c.autermann@52north.org>
- */
-public abstract class AbstractComplianceSuiteTest implements ComplianceSuiteTest {
-    private RequestExecutor executor;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+import org.n52.sos.service.it.v2.rest.CapabilitiesTest;
+import org.n52.sos.service.it.v2.rest.OfferingsTest;
+import org.n52.sos.service.it.v2.rest.SensorsTest;
+import org.n52.sos.service.it.v2.rest.ServiceEndpointTest;
+import org.n52.sos.service.it.v40.H2Database;
+import org.n52.sos.service.it.v40.SOS40Executor;
 
-    public RequestExecutor getExecutor() {
-        return executor;
+@RunWith(ComplianceSuiteRunner.class)
+public class SosV2V4RestSuiteTest implements ComplianceSuite {
+    @Rule
+    public final H2Database database = new H2Database();
+
+    @Override
+    public Class<?>[] getTests() {
+        return new Class<?>[] {
+            CapabilitiesTest.class,
+            OfferingsTest.class,
+            SensorsTest.class,
+            ServiceEndpointTest.class
+        };
     }
 
     @Override
-    public void setExecutor(RequestExecutor executor) {
-        this.executor = executor;
-    }
-
-    public Client get(String path) {
-        return executor.get(path);
-    }
-
-    public Client post(String path) {
-        return executor.post(path);
-    }
-
-    public Client put(String path) {
-        return executor.put(path);
-    }
-
-    public Client delete(String path) {
-        return executor.delete(path);
-    }
-
-    public Client head(String path) {
-        return executor.head(path);
+    public RequestExecutor createExecutor() {
+        return new SOS40Executor();
     }
 }

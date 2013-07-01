@@ -171,4 +171,9 @@ class MockHttpServletClient implements Client {
             throw new AssertionError();
         }
     }
+
+    @Override
+    public void execute() {
+        asResponse();
+    }
 }
