@@ -230,7 +230,7 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
      * @see #createRestSensor(String, String)
      */
     protected Response addSensor(final String sensorId,
-                                 final String offeringId)
+                                  final String offeringId)
             throws OwsExceptionReport {
         return post(REST_URL + "/" + getConstants().getResourceSensors())
                 .accept(CONTENT_TYPE)
@@ -259,11 +259,11 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
     }
 
     protected Response addMeasurement(final String sensorId,
-                                      final String offeringId,
-                                      final long timestamp,
-                                      final double value,
-                                      final String featureId,
-                                      final String observableProperty)
+                                       final String offeringId,
+                                       final long timestamp,
+                                       final double value,
+                                       final String featureId,
+                                       final String observableProperty)
             throws OwsExceptionReport {
         return post(REST_URL + "/" + getConstants()
                 .getResourceObservations())

@@ -37,7 +37,7 @@ import org.springframework.mock.web.MockServletContext;
  * J&uuml;rrens</a>
  * @author Carsten Hollmann <c.hollmann@52north.org>
  */
-public abstract class MockHttpServletExecutor
+public abstract class MockHttpExecutor
         extends ExternalResource
         implements RequestExecutor {
     public static final String ENCODING = "UTF-8";
@@ -48,11 +48,11 @@ public abstract class MockHttpServletExecutor
             new MockServletConfig(servletContext);
     private HttpServlet servlet;
 
-    public MockHttpServletExecutor(ServletFactory servletFactory) {
+    public MockHttpExecutor(ServletFactory servletFactory) {
         this.servletFactory = servletFactory;
     }
 
-    public MockHttpServletExecutor(final Class<? extends HttpServlet> klass) {
+    public MockHttpExecutor(final Class<? extends HttpServlet> klass) {
         this.servletFactory = new ServletFactory() {
             @Override
             public HttpServlet create() {
@@ -82,31 +82,31 @@ public abstract class MockHttpServletExecutor
 
     @Override
     public Client get(String path) {
-        return new MockHttpServletClient(servlet, "GET", path);
+        return new MockHttpClient(servlet, "GET", path);
     }
 
     @Override
     public Client post(String path) {
-        return new MockHttpServletClient(servlet, "POST", path);
+        return new MockHttpClient(servlet, "POST", path);
     }
 
     @Override
     public Client put(String path) {
-        return new MockHttpServletClient(servlet, "PUT", path);
+        return new MockHttpClient(servlet, "PUT", path);
     }
 
     @Override
     public Client delete(String path) {
-        return new MockHttpServletClient(servlet, "DELETE", path);
+        return new MockHttpClient(servlet, "DELETE", path);
     }
 
     @Override
     public Client options(String path) {
-        return new MockHttpServletClient(servlet, "OPTIONS", path);
+        return new MockHttpClient(servlet, "OPTIONS", path);
     }
 
     @Override
     public Client head(String path) {
-        return new MockHttpServletClient(servlet, "HEAD", path);
+        return new MockHttpClient(servlet, "HEAD", path);
     }
 }

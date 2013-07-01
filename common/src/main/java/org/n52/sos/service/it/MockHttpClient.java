@@ -42,7 +42,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-class MockHttpServletClient implements Client {
+class MockHttpClient implements Client {
     private ServletContext context = null;
     private final Map<String, Set<String>> headers =
             new HashMap<String, Set<String>>(5);
@@ -53,14 +53,14 @@ class MockHttpServletClient implements Client {
     private String path = null;
     private String content = null;
 
-    MockHttpServletClient(HttpServlet servlet, String method, String path) {
+    MockHttpClient(HttpServlet servlet, String method, String path) {
         this.servlet = servlet;
         this.method = method;
         this.path = path;
     }
 
     @Override
-    public MockHttpServletClient header(String header, String value) {
+    public MockHttpClient header(String header, String value) {
         Set<String> set = headers.get(header);
         if (set == null) {
             headers.put(header, set = new HashSet<String>(1));
@@ -70,17 +70,17 @@ class MockHttpServletClient implements Client {
     }
 
     @Override
-    public MockHttpServletClient contentType(String type) {
+    public MockHttpClient contentType(String type) {
         return header("Content-Type", type);
     }
 
     @Override
-    public MockHttpServletClient accept(String type) {
+    public MockHttpClient accept(String type) {
         return header("Accept", type);
     }
 
     @Override
-    public MockHttpServletClient query(String key, String value) {
+    public MockHttpClient query(String key, String value) {
         Set<String> set = query.get(key);
         if (set == null) {
             query.put(key, set = new HashSet<String>(1));
@@ -90,22 +90,22 @@ class MockHttpServletClient implements Client {
     }
 
     @Override
-    public MockHttpServletClient query(Enum<?> key, String value) {
+    public MockHttpClient query(Enum<?> key, String value) {
         return query(key.name(), value);
     }
 
     @Override
-    public MockHttpServletClient query(Enum<?> key, Enum<?> value) {
+    public MockHttpClient query(Enum<?> key, Enum<?> value) {
         return query(key.name(), value.name());
     }
 
     @Override
-    public MockHttpServletClient query(String key, Enum<?> value) {
+    public MockHttpClient query(String key, Enum<?> value) {
         return query(key, value.name());
     }
 
     @Override
-    public MockHttpServletClient entity(String content) {
+    public MockHttpClient entity(String content) {
         this.content = content;
         return this;
     }
@@ -149,7 +149,7 @@ class MockHttpServletClient implements Client {
             req.setPathInfo(path);
             if (content != null) {
                 req.setContent(content
-                        .getBytes(MockHttpServletExecutor.ENCODING));
+                        .getBytes(MockHttpExecutor.ENCODING));
             }
             return req;
         } catch (UnsupportedEncodingException ex) {
@@ -158,9 +158,9 @@ class MockHttpServletClient implements Client {
     }
 
     @Override
-    public Response asResponse() {
+    public MockHttpResponse asResponse() {
         try {
-            Response res = new Response();
+            MockHttpResponse res = new MockHttpResponse();
             this.servlet.service(build(), res);
             return res;
         } catch (ServletException ex) {
