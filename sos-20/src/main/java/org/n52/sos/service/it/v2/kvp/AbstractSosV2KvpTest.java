@@ -31,7 +31,7 @@ public abstract class AbstractSosV2KvpTest
         Node node = kvp()
                 .query(REQUEST_PARAMETER, getRequest())
                 .query(VERSION_PARAMETER, VERSION)
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(missingServiceParameterValueException()));
     }
 
@@ -42,7 +42,7 @@ public abstract class AbstractSosV2KvpTest
                 .query(REQUEST_PARAMETER, getRequest())
                 .query(SERVICE_PARAMETER, "")
                 .query(VERSION_PARAMETER, VERSION)
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(missingServiceParameterValueException()));
     }
 
@@ -53,7 +53,7 @@ public abstract class AbstractSosV2KvpTest
                 .query(REQUEST_PARAMETER, getRequest())
                 .query(SERVICE_PARAMETER, "INVALID")
                 .query(VERSION_PARAMETER, VERSION)
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(invalidServiceParameterValueException("INVALID")));
     }
 
@@ -63,7 +63,7 @@ public abstract class AbstractSosV2KvpTest
         Node node = kvp()
                 .query(REQUEST_PARAMETER, getRequest())
                 .query(SERVICE_PARAMETER, SERVICE)
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(missingVersionParameterValueException()));
     }
 
@@ -74,7 +74,7 @@ public abstract class AbstractSosV2KvpTest
                 .query(REQUEST_PARAMETER, getRequest())
                 .query(SERVICE_PARAMETER, SERVICE)
                 .query(VERSION_PARAMETER, "")
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(missingVersionParameterValueException()));
     }
 
@@ -85,7 +85,7 @@ public abstract class AbstractSosV2KvpTest
                 .query(REQUEST_PARAMETER, getRequest())
                 .query(SERVICE_PARAMETER, SERVICE)
                 .query(VERSION_PARAMETER, "1.2.3")
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(invalidVersionParameterValueException("1.2.3")));
     }
 }

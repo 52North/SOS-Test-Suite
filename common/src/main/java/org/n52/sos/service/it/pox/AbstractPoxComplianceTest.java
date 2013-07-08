@@ -41,6 +41,6 @@ public class AbstractPoxComplianceTest extends AbstractComplianceSuiteTest {
                 .accept(APPLICATION_XML)
                 .contentType(APPLICATION_XML)
                 .entity(xml.xmlText())
-                .asResponse();
+                .response();
     }
 }

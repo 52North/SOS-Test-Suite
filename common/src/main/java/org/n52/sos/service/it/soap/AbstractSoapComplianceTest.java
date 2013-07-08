@@ -53,6 +53,6 @@ public abstract class AbstractSoapComplianceTest extends AbstractComplianceSuite
                 .accept(APPLICATION_SOAP_XML)
                 .contentType(APPLICATION_SOAP_XML)
                 .entity(envelope(xml).xmlText())
-                .asResponse();
+                .response();
     }
 }

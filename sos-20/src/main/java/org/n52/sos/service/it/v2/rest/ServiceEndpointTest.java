@@ -40,9 +40,9 @@ public class ServiceEndpointTest extends RestBindingTest {
     @Test
     public void should_redirect_to_capabilities_resource_with_status_and_location_header() {
         final Response response = get(REST_URL)
-                .accept(CONTENT_TYPE).asResponse();
+                .accept(CONTENT_TYPE).response();
         final Response response2 = get(REST_URL + "/")
-                .accept(CONTENT_TYPE).asResponse();
+                .accept(CONTENT_TYPE).response();
 
         getErrors().checkThat(response.getStatus(),
                               is(HttpServletResponse.SC_SEE_OTHER));

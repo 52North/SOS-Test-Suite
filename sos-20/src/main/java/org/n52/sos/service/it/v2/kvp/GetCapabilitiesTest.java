@@ -54,7 +54,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
     public void missingServiceParameter() {
         Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, hasXPath(CAPABILITIES));
     }
 
@@ -64,7 +64,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
         Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, "")
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(missingServiceParameterValueException()));
     }
 
@@ -74,7 +74,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
         Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, "INVALID")
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(node, is(invalidServiceParameterValueException("INVALID")));
     }
 
@@ -103,7 +103,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, SERVICE)
                 .query(SosConstants.GetCapabilitiesParams.Sections, "")
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(
                 node,
                 is(exception(OwsExceptionCode.MissingParameterValue, GetCapabilitiesParams.Sections,
@@ -116,7 +116,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
                 .query(OWSConstants.RequestParams.request, SosConstants.Operations.GetCapabilities)
                 .query(OWSConstants.RequestParams.service, SosConstants.SOS)
                 .query(SosConstants.GetCapabilitiesParams.Sections, "INVALID")
-                .asResponse().asNode();
+                .response().asNode();
         assertThat(
                 node,
                 is(exception(OwsExceptionCode.InvalidParameterValue, GetCapabilitiesParams.Section,
@@ -175,7 +175,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
         return kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, SERVICE)
-                .asResponse().asNode();
+                .response().asNode();
     }
 
     @Override

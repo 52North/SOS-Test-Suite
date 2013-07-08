@@ -158,7 +158,7 @@ class MockHttpClient implements Client {
     }
 
     @Override
-    public MockHttpResponse asResponse() {
+    public MockHttpResponse response() {
         try {
             MockHttpResponse res = new MockHttpResponse();
             this.servlet.service(build(), res);
@@ -174,6 +174,6 @@ class MockHttpClient implements Client {
 
     @Override
     public void execute() {
-        asResponse();
+        response();
     }
 }

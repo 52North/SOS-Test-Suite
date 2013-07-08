@@ -97,7 +97,7 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
     }
 
     protected Response getResource(final String resType) {
-        return get(REST_URL + "/" + resType).accept(CONTENT_TYPE).asResponse();
+        return get(REST_URL + "/" + resType).accept(CONTENT_TYPE).response();
     }
 
     /**
@@ -236,7 +236,7 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
                 .accept(CONTENT_TYPE)
                 .contentType(CONTENT_TYPE)
                 .entity(createRestSensor(sensorId, offeringId))
-                .asResponse();
+                .response();
     }
 
     protected String selfLink(final String resType) {
@@ -270,7 +270,7 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
                 .accept(CONTENT_TYPE)
                 .contentType(CONTENT_TYPE)
                 .entity(createRestMeasurement(sensorId, offeringId, timestamp, value, featureId, observableProperty))
-                .asResponse();
+                .response();
     }
 
     protected Constants getConstants() {

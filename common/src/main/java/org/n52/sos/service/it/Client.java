@@ -39,7 +39,7 @@ public interface Client {
 
     Client query(String key, Enum<?> value);
 
-    Response asResponse();
+    Response response();
 
     void execute();
 }
