@@ -41,6 +41,7 @@ import org.n52.sos.ogc.sensorML.SensorMLConstants;
 import org.n52.sos.ogc.sos.Sos2Constants;
 import org.n52.sos.ogc.sos.SosConstants;
 import org.n52.sos.ogc.swe.SWEConstants;
+import org.n52.sos.ogc.swes.SwesConstants;
 import org.n52.sos.util.CollectionHelper;
 import org.n52.sos.util.W3CConstants;
 
@@ -66,7 +67,7 @@ public class SosNamespaceContext implements NamespaceContext {
         namespaceForPrefix.put(SosConstants.NS_SOS_PREFIX, Sos2Constants.NS_SOS_20);
         namespaceForPrefix.put("sosREST", "http://www.opengis.net/sosREST/1.0");
         namespaceForPrefix.put(SWEConstants.NS_SWE_PREFIX, SWEConstants.NS_SWE_20);
-        namespaceForPrefix.put(SWEConstants.NS_SWES_PREFIX, SWEConstants.NS_SWES_20);
+        namespaceForPrefix.put(SwesConstants.NS_SWES_PREFIX, SwesConstants.NS_SWES_20);
         namespaceForPrefix.put(W3CConstants.NS_XLINK_PREFIX, W3CConstants.NS_XLINK);
         namespaceForPrefix.put(W3CConstants.NS_XSI_PREFIX, W3CConstants.NS_XSI);
         namespaceForPrefix.put("xml", "http://www.w3.org/XML/1998/namespace");
