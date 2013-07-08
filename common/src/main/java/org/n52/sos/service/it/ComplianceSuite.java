@@ -32,5 +32,5 @@ import org.junit.runner.RunWith;
 public interface ComplianceSuite {
     Class<?>[] getTests();
 
-    RequestExecutor createExecutor();
+    RequestExecutor getExecutor();
 }

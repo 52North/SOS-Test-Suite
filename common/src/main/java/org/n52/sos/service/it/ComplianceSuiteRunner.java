@@ -65,7 +65,7 @@ public class ComplianceSuiteRunner extends Suite {
     private static RunnerBuilder runnerBuilder(Class<?> klass)
             throws InitializationError {
         final ComplianceSuite parent = instantiate(klass);
-        final RequestExecutor executor = parent.createExecutor();
+        final RequestExecutor executor = parent.getExecutor();
         return new AllDefaultPossibilitiesBuilder(true) {
             @Override
             public Runner runnerForClass(Class<?> testClass) throws Throwable {
