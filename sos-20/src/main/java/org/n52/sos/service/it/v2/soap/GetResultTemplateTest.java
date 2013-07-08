@@ -29,9 +29,6 @@ import net.opengis.sos.x20.GetResultTemplateType;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
-import org.n52.sos.ogc.sos.Sos2Constants;
-import org.n52.sos.ogc.sos.SosConstants;
-import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
  * Test for SOAP SOS 2.0 GetResultTemplate request.

@@ -32,7 +32,6 @@ import net.opengis.swes.x20.UpdateSensorDescriptionType;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
-import org.n52.sos.ogc.sensorML.SensorMLConstants;
 
 /**
  * Test for SOAP SOS 2.0 UpdateSensorDescription request.
@@ -85,11 +84,11 @@ public class UpdateSensorDescriptionTest extends AbstractSosV2SoapTest {
                 insertSensorDocument.addNewUpdateSensorDescription();
         updateSensorDescriptionType.setProcedure("procedure");
         updateSensorDescriptionType
-                .setProcedureDescriptionFormat(SensorMLConstants.SENSORML_OUTPUT_FORMAT_URL);
+                .setProcedureDescriptionFormat("http://www.opengis.net/sensorML/1.0.1");
         SensorMLDocument sensorMLDocument = SensorMLDocument.Factory
                 .newInstance();
         SensorML sensorML = sensorMLDocument.addNewSensorML();
-        sensorML.setVersion(SensorMLConstants.VERSION_V101);
+        sensorML.setVersion("1.0.1");
         SystemDocument systemDocument = SystemDocument.Factory.newInstance();
         SystemType systemType = systemDocument.addNewSystem();
         sensorML.addNewMember().set(systemDocument);

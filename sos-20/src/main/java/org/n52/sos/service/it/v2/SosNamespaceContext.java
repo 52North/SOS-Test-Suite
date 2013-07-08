@@ -21,7 +21,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-
 package org.n52.sos.service.it.v2;
 
 import java.util.Collections;
@@ -30,49 +29,35 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
-import javax.xml.soap.SOAPConstants;
 
-import org.n52.sos.ogc.filter.FilterConstants;
-import org.n52.sos.ogc.gml.GMLConstants;
-import org.n52.sos.ogc.om.OMConstants;
-import org.n52.sos.ogc.om.features.SFConstants;
-import org.n52.sos.ogc.ows.OWSConstants;
-import org.n52.sos.ogc.sensorML.SensorMLConstants;
-import org.n52.sos.ogc.sos.Sos2Constants;
-import org.n52.sos.ogc.sos.SosConstants;
-import org.n52.sos.ogc.swe.SWEConstants;
-import org.n52.sos.ogc.swes.SwesConstants;
 import org.n52.sos.util.CollectionHelper;
-import org.n52.sos.util.W3CConstants;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class SosNamespaceContext implements NamespaceContext {
     private final Map<String, String> prefixForNamespace;
-
     private final Map<String, String> namespaceForPrefix;
 
     public SosNamespaceContext() {
-        namespaceForPrefix = new HashMap<String, String>(15);
-        namespaceForPrefix.put(FilterConstants.NS_FES_2_PREFIX, FilterConstants.NS_FES_2);
-        namespaceForPrefix.put(GMLConstants.NS_GML_PREFIX, GMLConstants.NS_GML_32);
-        namespaceForPrefix.put(OMConstants.NS_OM_PREFIX, OMConstants.NS_OM_2);
-        namespaceForPrefix.put(OWSConstants.NS_OWS_PREFIX, OWSConstants.NS_OWS);
-        namespaceForPrefix.put(SFConstants.NS_SAMS_PREFIX, SFConstants.NS_SAMS);
-        namespaceForPrefix.put(SFConstants.NS_SA_PREFIX, SFConstants.NS_SA);
-        namespaceForPrefix.put(SFConstants.NS_SF_PREFIX, SFConstants.NS_SF);
-        namespaceForPrefix.put(SensorMLConstants.NS_SML_PREFIX, SensorMLConstants.NS_SML);
-        namespaceForPrefix.put("soap", SOAPConstants.URI_NS_SOAP_1_2_ENVELOPE);
-        namespaceForPrefix.put(SosConstants.NS_SOS_PREFIX, Sos2Constants.NS_SOS_20);
+        namespaceForPrefix = new HashMap<String, String>(16);
+        namespaceForPrefix.put("fes", "http://www.opengis.net/fes/2.0");
+        namespaceForPrefix.put("gml", "http://www.opengis.net/gml/3.2");
+        namespaceForPrefix.put("om", "http://www.opengis.net/om/2.0");
+        namespaceForPrefix.put("ows", "http://www.opengis.net/ows/1.1");
+        namespaceForPrefix.put("sams", "http://www.opengis.net/samplingSpatial/2.0");
+        namespaceForPrefix.put("sa", "http://www.opengis.net/sampling/1.0");
+        namespaceForPrefix.put("sf", "http://www.opengis.net/sampling/2.0");
+        namespaceForPrefix.put("sml", "http://www.opengis.net/sensorML/1.0.1");
+        namespaceForPrefix.put("soap", "http://www.w3.org/2003/05/soap-envelope");
+        namespaceForPrefix.put("sos", "http://www.opengis.net/sos/2.0");
         namespaceForPrefix.put("sosREST", "http://www.opengis.net/sosREST/1.0");
-        namespaceForPrefix.put(SWEConstants.NS_SWE_PREFIX, SWEConstants.NS_SWE_20);
-        namespaceForPrefix.put(SwesConstants.NS_SWES_PREFIX, SwesConstants.NS_SWES_20);
-        namespaceForPrefix.put(W3CConstants.NS_XLINK_PREFIX, W3CConstants.NS_XLINK);
-        namespaceForPrefix.put(W3CConstants.NS_XSI_PREFIX, W3CConstants.NS_XSI);
+        namespaceForPrefix.put("swe", "http://www.opengis.net/swe/2.0");
+        namespaceForPrefix.put("swes", "http://www.opengis.net/swes/2.0");
+        namespaceForPrefix.put("xlink", "http://www.w3.org/1999/xlink");
+        namespaceForPrefix.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
         namespaceForPrefix.put("xml", "http://www.w3.org/XML/1998/namespace");
         prefixForNamespace = CollectionHelper.reverse(namespaceForPrefix);
-
     }
 
     @Override
@@ -81,13 +66,12 @@ public class SosNamespaceContext implements NamespaceContext {
     }
 
     @Override
-    public String getPrefix(final String namespaceURI) {
-        return prefixForNamespace.get(namespaceURI);
+    public String getPrefix(final String namespace) {
+        return prefixForNamespace.get(namespace);
     }
 
     @Override
-    public Iterator<String> getPrefixes(final String namespaceURI) {
-        return Collections.singleton(getPrefix(namespaceURI)).iterator();
+    public Iterator<String> getPrefixes(final String namespace) {
+        return Collections.singleton(getPrefix(namespace)).iterator();
     }
-
 }

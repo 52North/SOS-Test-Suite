@@ -31,7 +31,6 @@ import net.opengis.sos.x20.GetCapabilitiesType;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
-import org.n52.sos.ogc.sos.Sos2Constants;
 import org.n52.sos.service.it.Response;
 
 /**
@@ -42,48 +41,49 @@ import org.n52.sos.service.it.Response;
  * @since 4.0.0
  */
 public class GetCapabilitiesTest extends AbstractSosV2SoapTest {
-    @Override
     @Test
+    @Override
     public void missingServiceParameter() throws XmlException {
         GetCapabilitiesDocument getCapabilitiesDocument =
                 GetCapabilitiesDocument.Factory.newInstance();
         GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument
                 .addNewGetCapabilities2();
         getCapabilitiesType.addNewAcceptVersions().addNewVersion()
-                .setStringValue(Sos2Constants.SERVICEVERSION);
+                .setStringValue("2.0.0");
         Response res = soap(getCapabilitiesDocument);
         getErrors().checkThat(res.getStatus(), is(200));
         // TODO check if response is a sos:Capabilities document
     }
 
-    @Override
     @Test
+    @Override
     public void emptyServiceParameter() throws XmlException {
         GetCapabilitiesDocument getCapabilitiesDocument =
                 GetCapabilitiesDocument.Factory.newInstance();
         GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument
                 .addNewGetCapabilities2();
         getCapabilitiesType.addNewAcceptVersions().addNewVersion()
-                .setStringValue(Sos2Constants.SERVICEVERSION);
+                .setStringValue("2.0.0");
         getCapabilitiesType.setService("");
         Response res = soap(getCapabilitiesDocument);
         getErrors().checkThat(res.getStatus(), is(400));
-        getErrors()
-                .checkThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
+        getErrors().checkThat(res.asNode(),
+                              is(missingServiceParameterValueExceptionFault()));
     }
 
     @Test
+    @Override
     public void invalidServiceParameter() throws XmlException {
         GetCapabilitiesDocument getCapabilitiesDocument =
                 GetCapabilitiesDocument.Factory.newInstance();
         GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument
                 .addNewGetCapabilities2();
         getCapabilitiesType.addNewAcceptVersions().addNewVersion()
-                .setStringValue(Sos2Constants.SERVICEVERSION);
+                .setStringValue("2.0.0");
         getCapabilitiesType.setService("INVALID");
         Response res = soap(getCapabilitiesDocument);
         getErrors().checkThat(res.getStatus(), is(400));
-        getErrors()
-                .checkThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
+        getErrors().checkThat(res.asNode(),
+                              is(invalidServiceParameterValueExceptionFault("INVALID")));
     }
 }
