@@ -23,77 +23,55 @@
  */
 package org.n52.sos.service.it.v2.rest;
 
-import static org.n52.sos.ogc.swe.SWEConstants.SweCoordinateName.*;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import javax.xml.namespace.NamespaceContext;
+import javax.xml.namespace.QName;
 
+import net.opengis.gml.x32.MeasureType;
+import net.opengis.gml.x32.TimeInstantType;
+import net.opengis.gml.x32.TimePeriodType;
+import net.opengis.om.x20.OMObservationDocument;
 import net.opengis.om.x20.OMObservationType;
+import net.opengis.sensorML.x101.CapabilitiesDocument.Capabilities;
+import net.opengis.sensorML.x101.IdentificationDocument.Identification;
+import net.opengis.sensorML.x101.IdentificationDocument.Identification.IdentifierList.Identifier;
+import net.opengis.sensorML.x101.InputsDocument.Inputs;
+import net.opengis.sensorML.x101.IoComponentPropertyType;
+import net.opengis.sensorML.x101.OutputsDocument.Outputs;
+import net.opengis.sensorML.x101.PositionDocument.Position;
 import net.opengis.sensorML.x101.SystemType;
+import net.opengis.sensorML.x101.TermDocument.Term;
 import net.opengis.sosREST.x10.LinkType;
 import net.opengis.sosREST.x10.ObservationDocument;
 import net.opengis.sosREST.x10.ObservationType;
 import net.opengis.sosREST.x10.SensorDocument;
+import net.opengis.swe.x101.AnyScalarPropertyType;
+import net.opengis.swe.x101.ObservablePropertyDocument.ObservableProperty;
+import net.opengis.swe.x101.QuantityDocument.Quantity;
+import net.opengis.swe.x101.SimpleDataRecordType;
+import net.opengis.swe.x101.VectorType;
+import net.opengis.swe.x101.VectorType.Coordinate;
 
 import org.joda.time.DateTime;
-import org.n52.sos.binding.rest.Constants;
-import org.n52.sos.encode.OmEncoderv20;
-import org.n52.sos.encode.SensorMLEncoderv101;
-import org.n52.sos.ogc.gml.CodeWithAuthority;
-import org.n52.sos.ogc.gml.time.TimeInstant;
-import org.n52.sos.ogc.gml.time.TimePeriod;
-import org.n52.sos.ogc.om.AbstractPhenomenon;
-import org.n52.sos.ogc.om.OmObservation;
-import org.n52.sos.ogc.om.OmObservationConstellation;
-import org.n52.sos.ogc.om.SingleObservationValue;
-import org.n52.sos.ogc.om.features.samplingFeatures.SamplingFeature;
-import org.n52.sos.ogc.om.values.QuantityValue;
-import org.n52.sos.ogc.ows.OwsExceptionReport;
-import org.n52.sos.ogc.sensorML.SensorMLConstants;
-import org.n52.sos.ogc.sensorML.System;
-import org.n52.sos.ogc.sensorML.elements.SmlCapabilities;
-import org.n52.sos.ogc.sensorML.elements.SmlIdentifier;
-import org.n52.sos.ogc.sensorML.elements.SmlIo;
-import org.n52.sos.ogc.sensorML.elements.SmlPosition;
-import org.n52.sos.ogc.sos.SosProcedureDescriptionUnknowType;
-import org.n52.sos.ogc.swe.SweCoordinate;
-import org.n52.sos.ogc.swe.SweField;
-import org.n52.sos.ogc.swe.SweSimpleDataRecord;
-import org.n52.sos.ogc.swe.simpleType.SweAbstractSimpleType;
-import org.n52.sos.ogc.swe.simpleType.SweObservableProperty;
-import org.n52.sos.ogc.swe.simpleType.SweQuantity;
-import org.n52.sos.ogc.swe.simpleType.SweText;
-import org.n52.sos.service.ServiceConfiguration;
 import org.n52.sos.service.it.AbstractComplianceSuiteTest;
 import org.n52.sos.service.it.Response;
 import org.n52.sos.service.it.v2.SosNamespaceContext;
-import org.n52.sos.util.CollectionHelper;
-import org.n52.sos.util.JavaHelper;
-import org.n52.sos.util.XmlOptionsHelper;
 
 /**
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
- * J&uuml;rrens</a>
- *
+ *         J&uuml;rrens</a>
+ * 
  * @since 4.0.0
  */
-public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
+public abstract class RestBindingTest extends AbstractComplianceSuiteTest implements RestTestConstants {
     protected static final String REST_URL = "/rest";
+
     protected static final String CONTENT_TYPE = "application/gml+xml";
+
     protected static final NamespaceContext NS_CTXT = new SosNamespaceContext();
 
-    protected String link(final String relType,
-                          final String resTypeWithOrWithoutId) {
-        return String
-                .format("sosREST:link[@rel='%s' and @href='%s' and @type='%s']",
-                        getConstants().getEncodingNamespace() + "/" + relType,
-                        getConstants().getServiceUrl() + REST_URL + "/" +
-                        resTypeWithOrWithoutId,
-                        CONTENT_TYPE);
+    protected String link(final String relType, final String resTypeWithOrWithoutId) {
+        return String.format("sosREST:link[@rel='%s' and @href='%s' and @type='%s']", EncodingNamespace + "/"
+                + relType, ServiceUrl + REST_URL + "/" + resTypeWithOrWithoutId, CONTENT_TYPE);
     }
 
     protected Response getResource(final String resType) {
@@ -102,178 +80,174 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest {
 
     /**
      * Creating example sensor with id <tt>sensorId</tt> and offering
-     * <tt>offeringId</tt> observing <tt>test-observable-property</tt>
-     * with type
+     * <tt>offeringId</tt> observing <tt>test-observable-property</tt> with type
      * <tt>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</tt>
      * with feature
      * <tt>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</tt>
      */
-    protected String createRestSensor(final String sensorId,
-                                      final String offeringId) throws
-            OwsExceptionReport {
-        final System system = (System) new System()
-                .setPosition(new SmlPosition("test-sensor-position", true, ServiceConfiguration
-                .getInstance()
-                .getSrsNamePrefixSosV2() + 4326, createCoordinates(52.0, 7.5, 42.0)))
-                .setInputs(createInputList("test-observable-property"))
-                .setOutputs(createOutputList("test-observable-property"))
-                .setIdentifications(createIdentifications(sensorId, offeringId))
-                .addCapabilities(new SmlCapabilities("InsertionMetadata",
-                                                     new SweSimpleDataRecord()
-                .addField(new SweField("sos:ObservationType", new SweText()
-                .setValue("http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement")))
-                .addField(new SweField("sos:FeatureOfInterestType", new SweText()
-                .setValue("http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint")))))
-                .setIdentifier(sensorId);
-        final SystemType xbSystem = (SystemType) new SensorMLEncoderv101()
-                .encode(system);
-        final SensorDocument restSensor = SensorDocument.Factory
-                .newInstance(XmlOptionsHelper.getInstance().getXmlOptions());
-        final SystemType substitute = (SystemType) restSensor.addNewSensor()
-                .addNewProcess()
-                .substitute(SensorMLConstants.SYSTEM_QNAME, SystemType.type);
-        substitute.set(xbSystem);
+    protected String createRestSensor(final String sensorId, final String offeringId) {
+        final SensorDocument restSensor = SensorDocument.Factory.newInstance();
+        final SystemType system =
+                (SystemType) restSensor
+                        .addNewSensor()
+                        .addNewProcess()
+                        .substitute(new QName("http://www.opengis.net/sensorML/1.0.1", "System", "sml"),
+                                SystemType.type);
+        system.setIdentificationArray(createIdentifications(sensorId, offeringId));
+        system.setInputs(createInputList("test-observable-property"));
+        system.setOutputs(createOutputList("test-observable-property"));
+        // capabilities
+        Capabilities capabilities = system.addNewCapabilities();
+        capabilities.setName("InsertionMetadata");
+        SimpleDataRecordType dataRecord =
+                (SimpleDataRecordType) capabilities.addNewAbstractDataRecord().substitute(
+                        new QName("http://www.opengis.net/swe/1.0.1", "SimpleDataRecord", "swe"),
+                        SimpleDataRecordType.type);
+        AnyScalarPropertyType field1 = dataRecord.addNewField();
+        field1.setName("sos:ObservationType");
+        field1.addNewText().setValue("http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement");
+        AnyScalarPropertyType field2 = dataRecord.addNewField();
+        field2.setName("sos:FeatureOfInterestType");
+        field2.addNewText().setValue("http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint");
+        Position position = system.addNewPosition();
+        position.setName("test-sensor-position");
+        position.setVector(createCoordinates(52.0, 7.5, 42.0, "http://www.opengis.net/def/crs/EPSG/0/4326"));
+        position.setName("test-sensor-position");
+        // .setIdentifier(sensorId);
         return restSensor.xmlText();
     }
 
-    private String createRestMeasurement(final String sensorId,
-                                         final String offeringId,
-                                         final long timestamp,
-                                         final double value,
-                                         final String featureId,
-                                         final String observableProperty) throws
-            OwsExceptionReport {
-        final OmObservation o = new OmObservation();
-        o.setValidTime(new TimePeriod(new DateTime(timestamp),
-                                      new DateTime(timestamp)));
-        o.setObservationConstellation(
-                new OmObservationConstellation(
-                new SosProcedureDescriptionUnknowType(sensorId, null, null),
-                new AbstractPhenomenon(observableProperty),
-                new SamplingFeature(new CodeWithAuthority(featureId))));
-        o.setResultTime(new TimeInstant(new DateTime(timestamp)));
-        final QuantityValue sosValue = new QuantityValue(new BigDecimal(value));
-        sosValue.setUnit("test-unit");
-        o.setValue(
-                new SingleObservationValue<BigDecimal>(
-                new TimeInstant(new DateTime(timestamp)),
-                sosValue));
-        final OMObservationType xbObservation =
-                (OMObservationType) new OmEncoderv20().encode(o);
-        final ObservationDocument restObsDoc = ObservationDocument.Factory
-                .newInstance(XmlOptionsHelper.getInstance().getXmlOptions());
+    private String createRestMeasurement(final String sensorId, final String offeringId, final long timestamp,
+            final double value, final String featureId, final String observableProperty) {
+        OMObservationDocument observationDoc = OMObservationDocument.Factory.newInstance();
+        OMObservationType observation = observationDoc.addNewOMObservation();
+        
+        observation.addNewPhenomenonTime().addNewAbstractTimeObject().substitute(new QName("http://www.opengis.net/gml/3.2", "TimePeriod", "gml"), TimePeriodType.type);
+        TimePeriodType timePeriodType = TimePeriodType.Factory.newInstance();
+        timePeriodType.setId("tp_123");
+        timePeriodType.addNewBeginPosition().setStringValue(new DateTime(timestamp).toString());
+        timePeriodType.addNewEndPosition().setStringValue(new DateTime(timestamp).toString());
+        
+        TimeInstantType timeInstant = observation.addNewResultTime().addNewTimeInstant();
+        timeInstant.setId("ti_123");
+        timeInstant.addNewTimePosition().setStringValue(new DateTime(timestamp).toString());
+        
+        observation.addNewProcedure().setHref(sensorId);
+        observation.addNewObservedProperty().setHref(observableProperty);
+        observation.addNewFeatureOfInterest().setHref(featureId);
+        
+        MeasureType measureType = MeasureType.Factory.newInstance();
+        measureType.setUom("test-unit");
+        measureType.setDoubleValue(value);
+
+        final ObservationDocument restObsDoc =
+                ObservationDocument.Factory.newInstance();
         final ObservationType restObservation = restObsDoc.addNewObservation();
-        restObservation.setOMObservation(xbObservation);
+        restObservation.setOMObservation(observation);
+        
         final LinkType link = restObservation.addNewLink();
         link.setType(CONTENT_TYPE);
-        link.setRel(getConstants().getEncodingNamespace() + "/" + getConstants()
-                .getResourceRelationOfferingGet());
-        link.setHref(getConstants().getServiceUrl() + getConstants()
-                .getUrlPattern() +
-                     "/" + getConstants().getResourceOfferings() + "/" +
-                     offeringId);
+        link.setRel(EncodingNamespace + "/" + ResourceRelationOfferingGet);
+        link.setHref(ServiceUrl + UrlPattern + "/"
+                + ResourceOfferings + "/" + offeringId);
         return restObsDoc.xmlText();
     }
 
-    private List<SmlIdentifier> createIdentifications(final String sensorId,
-                                                      final String offeringId) {
-        return CollectionHelper
-                .asList(new SmlIdentifier("uniqueId", "urn:ogc:def:identifier:OGC:1.0:uniqueID", sensorId),
-                        new SmlIdentifier("offerings", "urn:ogc:def:identifier:OGC:offeringID", offeringId));
+    private Identification[] createIdentifications(final String sensorId, final String offeringId) {
+        Identification identification = Identification.Factory.newInstance();
+        Identifier identifier1 = identification.addNewIdentifierList().addNewIdentifier();
+        identifier1.setName("uniqueId");
+        Term term1 = identifier1.addNewTerm();
+        term1.setDefinition("urn:ogc:def:identifier:OGC:1.0:uniqueID");
+        term1.setValue(sensorId);
+
+        Identifier identifier2 = identification.addNewIdentifierList().addNewIdentifier();
+        identifier2.setName("offerings");
+        Term term2 = identifier1.addNewTerm();
+        term2.setDefinition("urn:ogc:def:identifier:OGC:offeringID");
+        term2.setValue(offeringId);
+
+        Identification[] array = new Identification[1];
+        array[0] = identification;
+        return array;
     }
 
-    private List<SmlIo<?>> createOutputList(final String string) {
-        final SmlIo<Double> quanti = new SmlIo<Double>(
-                (SweQuantity) new SweQuantity()
-                .setUom("m")
-                .setDefinition("http://www.52north.org/test/observableProperty/42")
-                .setIdentifier("test-observable-property"));
-        final List<SmlIo<?>> outputs = new ArrayList<SmlIo<?>>(1);
-        outputs.add(quanti);
-        return Collections.unmodifiableList(outputs);
+    private Outputs createOutputList(final String name) {
+        Outputs outputs = Outputs.Factory.newInstance();
+        IoComponentPropertyType output = outputs.addNewOutputList().addNewOutput();
+        output.setName(name);
+        output.setQuantity(createQuantity("test-observable-property",
+                "http://www.52north.org/test/observableProperty/42", "m"));
+        return outputs;
     }
 
-    private List<SmlIo<?>> createInputList(final String string) {
-        final SmlIo<String> io = new SmlIo<String>(
-                (SweObservableProperty) new SweObservableProperty()
-                .setDefinition("http://www.52north.org/test/observableProperty/42")
-                .setIdentifier("test-observable-property"));
-        final List<SmlIo<?>> inputs = new ArrayList<SmlIo<?>>(1);
-        inputs.add(io);
-        return Collections.unmodifiableList(inputs);
+    private Inputs createInputList(final String name) {
+        Inputs inputs = Inputs.Factory.newInstance();
+        ObservableProperty observableProperty = inputs.addNewInputList().addNewInput().addNewObservableProperty();
+        observableProperty.addNewName().setStringValue("test-observable-property");
+        observableProperty.setDefinition("http://www.52north.org/test/observableProperty/42");
+        return inputs;
     }
 
-    private List<SweCoordinate<?>> createCoordinates(final double latitude,
-                                                     final double longitude,
-                                                     final double altitudeV) {
-        final List<SweCoordinate<?>> sweCoordinates =
-                new ArrayList<SweCoordinate<?>>(3);
-        sweCoordinates.add(new SweCoordinate<Double>(
-                northing, createSweQuantity(latitude, "y", "deg")));
-        sweCoordinates.add(new SweCoordinate<Double>(
-                easting, createSweQuantity(longitude, "x", "deg")));
-        sweCoordinates.add(new SweCoordinate<Double>(
-                altitude, createSweQuantity(altitudeV, "z", "m")));
-        return sweCoordinates;
+    private VectorType createCoordinates(final double latitude, final double longitude, final double altitudeV,
+            String referenceFrame) {
+        VectorType vector = VectorType.Factory.newInstance();
+        vector.setReferenceFrame(referenceFrame);
+        Coordinate coordinate1 = vector.addNewCoordinate();
+        coordinate1.setName("northing");
+        coordinate1.setQuantity(createQuantity(latitude, "y", "deg"));
+
+        Coordinate coordinate2 = vector.addNewCoordinate();
+        coordinate2.setName("easting");
+        coordinate2.setQuantity(createQuantity(longitude, "x", "deg"));
+
+        Coordinate coordinate3 = vector.addNewCoordinate();
+        coordinate3.setName("altitude");
+        coordinate3.setQuantity(createQuantity(altitudeV, "z", "m"));
+        return vector;
     }
 
-    private SweAbstractSimpleType<Double> createSweQuantity(final Double value,
-                                                            final String asixID,
-                                                            final String uom) {
-        return new SweQuantity()
-                .setValue(JavaHelper.asDouble(value))
-                .setAxisID(asixID)
-                .setUom(uom);
+    private Quantity createQuantity(final String identifier, final String definition, final String uom) {
+        Quantity quantity = Quantity.Factory.newInstance();
+        quantity.addNewName().setStringValue(identifier);
+        quantity.setDefinition(definition);
+        quantity.addNewUom().setCode(uom);
+        return quantity;
+    }
+
+    private Quantity createQuantity(final Double value, final String asixID, final String uom) {
+        Quantity quantity = Quantity.Factory.newInstance();
+        quantity.setValue(value);
+        quantity.setAxisID(asixID);
+        quantity.addNewUom().setCode(uom);
+        return quantity;
     }
 
     /**
      * @see #createRestSensor(String, String)
      */
-    protected Response addSensor(final String sensorId,
-                                  final String offeringId)
-            throws OwsExceptionReport {
-        return post(REST_URL + "/" + getConstants().getResourceSensors())
-                .accept(CONTENT_TYPE)
-                .contentType(CONTENT_TYPE)
-                .entity(createRestSensor(sensorId, offeringId))
-                .response();
+    protected Response addSensor(final String sensorId, final String offeringId) {
+        return post(REST_URL + "/" + ResourceSensors).accept(CONTENT_TYPE).contentType(CONTENT_TYPE)
+                .entity(createRestSensor(sensorId, offeringId)).response();
     }
 
     protected String selfLink(final String resType) {
         return selfLink(resType, null);
     }
 
-    protected String selfLink(final String resType,
-                              final String resourceId) {
-        return link(getConstants().getResourceRelationSelf(), resType +
-                                                              (resourceId !=
-                                                               null
-                                                               ? "/" +
-                                                                 resourceId
-                                                               : ""));
+    protected String selfLink(final String resType, final String resourceId) {
+        return link(ResourceRelationSelf, resType + (resourceId != null ? "/" + resourceId : ""));
     }
 
     protected String sensorLink(final String sensorId1) {
-        return link(getConstants().getResourceRelationSensorGet(),
-                    getConstants().getResourceSensors() + "/" + sensorId1);
+        return link(ResourceRelationSensorGet, ResourceSensors + "/" + sensorId1);
     }
 
-    protected Response addMeasurement(final String sensorId,
-                                       final String offeringId,
-                                       final long timestamp,
-                                       final double value,
-                                       final String featureId,
-                                       final String observableProperty)
-            throws OwsExceptionReport {
-        return post(REST_URL + "/" + getConstants()
-                .getResourceObservations())
-                .accept(CONTENT_TYPE)
-                .contentType(CONTENT_TYPE)
+    protected Response addMeasurement(final String sensorId, final String offeringId, final long timestamp,
+            final double value, final String featureId, final String observableProperty) {
+        return post(REST_URL + "/" + ResourceObservations).accept(CONTENT_TYPE).contentType(CONTENT_TYPE)
                 .entity(createRestMeasurement(sensorId, offeringId, timestamp, value, featureId, observableProperty))
                 .response();
     }
 
-    protected Constants getConstants() {
-        return Constants.getInstance();
-    }
 }

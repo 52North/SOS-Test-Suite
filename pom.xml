@@ -140,6 +140,11 @@
                 <artifactId>rest-code</artifactId>
                 <version>${rest.version}</version>
             </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>1.6</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>

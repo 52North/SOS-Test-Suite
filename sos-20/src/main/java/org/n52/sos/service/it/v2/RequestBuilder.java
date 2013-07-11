@@ -38,7 +38,7 @@ import net.opengis.swes.x20.InsertSensorType;
 
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlString;
-import org.n52.sos.ogc.om.OMConstants;
+import org.n52.sos.ogc.om.OmConstants;
 import org.n52.sos.ogc.sensorML.SensorMLConstants;
 
 /**
@@ -93,7 +93,7 @@ public class RequestBuilder {
         observation.addNewFeatureOfInterest().setHref("featureOfInterest");
         XmlObject result = observation.addNewResult();
         result = result
-                .substitute(new QName(OMConstants.NS_OM_2, OMConstants.EN_RESULT), XmlString.type);
+                .substitute(new QName(OmConstants.NS_OM_2, OmConstants.EN_RESULT), XmlString.type);
         result.set(XmlString.Factory.newValue("value"));
         return insertObservationDocument;
     }
