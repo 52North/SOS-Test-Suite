@@ -77,61 +77,61 @@ public class CapabilitiesTest extends RestBindingTest {
     @Test
     public void should_contain_self_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationSelf(), getConstants()
-                .getResourceCapabilities()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationSelf, 
+                ResourceCapabilities), NS_CTXT));
     }
 
     @Test
     public void should_contain_offerings_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationOfferingsGet(), getConstants()
-                .getResourceOfferings()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationOfferingsGet, 
+                ResourceOfferings), NS_CTXT));
     }
 
     @Test
     public void should_contain_features_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationFeaturesGet(), getConstants()
-                .getResourceFeatures()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationFeaturesGet, 
+                ResourceFeatures), NS_CTXT));
     }
 
     @Test
     public void should_contain_sensor_create_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationSensorCreate(), getConstants()
-                .getResourceSensors()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationSensorCreate, 
+                ResourceSensors), NS_CTXT));
     }
 
     @Test
     public void should_contain_sensors_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationSensorsGet(), getConstants()
-                .getResourceSensors()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationSensorsGet, 
+                ResourceSensors), NS_CTXT));
     }
 
     @Test
     public void should_contain_observation_create_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationObservationCreate(), getConstants()
-                .getResourceObservations()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationObservationCreate, 
+                ResourceObservations), NS_CTXT));
     }
 
     @Test
     public void should_contain_observation_link() {
         final Node response = getCapabilities().asNode();
-        assertThat(response, hasXPath(capabilitiesLink(getConstants()
-                .getResourceRelationObservationGet(), getConstants()
-                .getResourceObservations()), NS_CTXT));
+        assertThat(response, hasXPath(capabilitiesLink(
+                ResourceRelationObservationGet, 
+                ResourceObservations), NS_CTXT));
     }
 
     private Response getCapabilities() {
-        return getResource(getConstants().getResourceCapabilities());
+        return getResource(ResourceCapabilities);
     }
 
     private String capabilitiesLink(final String relType, final String resType) {

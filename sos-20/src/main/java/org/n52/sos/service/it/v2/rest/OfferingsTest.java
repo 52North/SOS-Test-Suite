@@ -32,7 +32,6 @@ import java.io.UnsupportedEncodingException;
 import org.apache.xmlbeans.XmlException;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.service.it.Response;
 import org.w3c.dom.Node;
 
@@ -60,21 +59,21 @@ public class OfferingsTest extends RestBindingTest {
         final Node response = getOfferings().asNode();
         assertThat(response, allOf(
                 hasXPath("//sosREST:OfferingCollection", NS_CTXT),
-                hasXPath(selfLink(getConstants().getResourceOfferings()), NS_CTXT)));
+                hasXPath(selfLink(ResourceOfferings), NS_CTXT)));
     }
 
     @Test
     public void should_contain_self_link() {
         final Node response = getOfferings().asNode();
-        assertThat(response, hasXPath(offeringsLink(getConstants()
-                .getResourceRelationSelf(), getConstants()
-                .getResourceOfferings()), NS_CTXT));
+        assertThat(response, hasXPath(offeringsLink(
+                ResourceRelationSelf, 
+                ResourceOfferings), NS_CTXT));
     }
 
     @Test
     @Ignore("Init DB with testdata not possible atm")
     public void should_contain_all_offering_links() throws
-            UnsupportedEncodingException, XmlException, OwsExceptionReport {
+            UnsupportedEncodingException, XmlException {
         final String sensorId = "test-sensor-id";
         final String offeringId = "test-offering-id";
         addSensor(sensorId, offeringId);
@@ -91,6 +90,6 @@ public class OfferingsTest extends RestBindingTest {
     }
 
     private Response getOfferings() {
-        return getResource(getConstants().getResourceOfferings());
+        return getResource(ResourceOfferings);
     }
 }
