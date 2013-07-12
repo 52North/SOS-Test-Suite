@@ -23,14 +23,18 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
+import javax.xml.namespace.QName;
+
 import net.opengis.om.x20.OMObservationType;
 import net.opengis.sos.x20.InsertResultTemplateDocument;
 import net.opengis.sos.x20.InsertResultTemplateType;
 import net.opengis.sos.x20.InsertResultTemplateType.ProposedTemplate;
 import net.opengis.sos.x20.ResultTemplateType;
 import net.opengis.swe.x20.DataRecordDocument;
+import net.opengis.swe.x20.DataRecordType.Field;
 import net.opengis.swe.x20.TextEncodingDocument;
 import net.opengis.swe.x20.TextEncodingType;
+import net.opengis.swe.x20.TextType;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
@@ -109,7 +113,10 @@ public class InsertResultTemplateTest extends AbstractSosV2SoapTest {
         resultTemplate.addNewResultEncoding().set(textEncodingDocument);
         DataRecordDocument dataRecordDocument = DataRecordDocument.Factory
                 .newInstance();
-        dataRecordDocument.addNewDataRecord().addNewField().setName("field");
+        Field field = dataRecordDocument.addNewDataRecord().addNewField();
+        field.setName("field");
+        TextType text = (TextType)field.addNewAbstractDataComponent().substitute(new QName("http://www.opengis.net/swe/2.0", "Text", "swe"), TextType.type);
+        text.setDefinition("text-definition");
         resultTemplate.addNewResultStructure().set(dataRecordDocument);
         return insertResultTemplateDocument;
     }
