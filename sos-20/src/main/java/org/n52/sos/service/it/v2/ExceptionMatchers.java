@@ -31,9 +31,9 @@ import static org.n52.sos.service.it.util.XPath.hasXPath;
 import static org.n52.sos.service.it.v2.XPaths.*;
 
 import org.hamcrest.Matcher;
-import org.n52.sos.exception.ows.OwsExceptionCode;
-import org.n52.sos.exception.swes.SwesExceptionCode;
-import org.n52.sos.ogc.ows.OWSConstants;
+import org.n52.sos.service.it.exception.OwsExceptionCode;
+import org.n52.sos.service.it.exception.SwesExceptionCode;
+import org.n52.sos.service.it.ogc.OWSConstants;
 import org.w3c.dom.Node;
 
 /**

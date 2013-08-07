@@ -38,8 +38,8 @@ import net.opengis.swes.x20.InsertSensorType;
 
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlString;
-import org.n52.sos.ogc.om.OmConstants;
-import org.n52.sos.ogc.sensorML.SensorMLConstants;
+import org.n52.sos.service.it.ogc.OmConstants;
+import org.n52.sos.service.it.ogc.SensorMLConstants;
 
 /**
  * TODO JavaDoc
