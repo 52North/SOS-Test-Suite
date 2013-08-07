@@ -30,7 +30,7 @@ import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
 
-import org.n52.sos.util.CollectionHelper;
+import org.n52.sos.service.it.util.CollectionHelper;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
