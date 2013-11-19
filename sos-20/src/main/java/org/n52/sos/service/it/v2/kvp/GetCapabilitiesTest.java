@@ -53,7 +53,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
         Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .response().asNode();
-        assertThat(node, hasXPath(CAPABILITIES));
+        assertThat(node, is(missingServiceParameterValueException()));
     }
 
     @Test
