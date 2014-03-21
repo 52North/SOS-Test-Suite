@@ -24,12 +24,14 @@
 package org.n52.sos.service.it.v2.rest;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasXPath;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.n52.sos.service.it.Response;
 import org.w3c.dom.Node;
+
+import org.n52.sos.service.it.Response;
 
 /**
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
@@ -78,7 +80,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_self_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationSelf, 
+                ResourceRelationSelf,
                 ResourceCapabilities), NS_CTXT));
     }
 
@@ -86,7 +88,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_offerings_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationOfferingsGet, 
+                ResourceRelationOfferingsGet,
                 ResourceOfferings), NS_CTXT));
     }
 
@@ -94,7 +96,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_features_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationFeaturesGet, 
+                ResourceRelationFeaturesGet,
                 ResourceFeatures), NS_CTXT));
     }
 
@@ -102,7 +104,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_sensor_create_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationSensorCreate, 
+                ResourceRelationSensorCreate,
                 ResourceSensors), NS_CTXT));
     }
 
@@ -110,7 +112,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_sensors_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationSensorsGet, 
+                ResourceRelationSensorsGet,
                 ResourceSensors), NS_CTXT));
     }
 
@@ -118,7 +120,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_observation_create_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationObservationCreate, 
+                ResourceRelationObservationCreate,
                 ResourceObservations), NS_CTXT));
     }
 
@@ -126,7 +128,7 @@ public class CapabilitiesTest extends RestBindingTest {
     public void should_contain_observation_link() {
         final Node response = getCapabilities().asNode();
         assertThat(response, hasXPath(capabilitiesLink(
-                ResourceRelationObservationGet, 
+                ResourceRelationObservationGet,
                 ResourceObservations), NS_CTXT));
     }
 
