@@ -24,7 +24,7 @@
 package org.n52.sos.service.it.v2.rest;
 
 public interface RestTestConstants {
-    
+
     String ResourceRelationSelf = "self";
 
     String ResourceRelationSensorGet = "sensor-get";
@@ -35,32 +35,30 @@ public interface RestTestConstants {
 
     String EncodingNamespace = "http://www.opengis.net/sosREST/1.0";
 
-    String ServiceUrl = "http://localhost:8080/SDC";
-    
     String ResourceOfferings = "offerings";
 
     String ResourceRelationOfferingGet = "offering-get";
-    
+
     String ResourceRelationOfferingsGet = "offerings-get";
-    
+
     String UrlPattern = "/sos/rest";
-    
+
     String ResourceCapabilities = "capabilities";
-    
+
     String ResourceRelationSensorsGet = "sensors-get";
 
     String ResourceRelationSensorCreate = "sensor-create";
-    
+
     String ResourceRelationObservationGet = "observation-get";
-    
+
     String ResourceRelationObservationCreate = "observation-create";
-    
+
     String ResourceRelationFeaturesGet = "features-get";
-    
+
     String ResourceFeatures = "features";
-    
+
     String HttpGetParameterNameProcedure = "procedures";
-    
+
     String ResourceRelationObservationsGet = "observations-get";
-    
+
 }

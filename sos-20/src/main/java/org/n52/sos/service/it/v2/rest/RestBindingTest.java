@@ -52,6 +52,7 @@ import net.opengis.swe.x101.VectorType;
 import net.opengis.swe.x101.VectorType.Coordinate;
 
 import org.joda.time.DateTime;
+
 import org.n52.sos.service.it.AbstractComplianceSuiteTest;
 import org.n52.sos.service.it.Response;
 import org.n52.sos.service.it.v2.SosNamespaceContext;
@@ -59,7 +60,7 @@ import org.n52.sos.service.it.v2.SosNamespaceContext;
 /**
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
  *         J&uuml;rrens</a>
- * 
+ *
  * @since 4.0.0
  */
 public abstract class RestBindingTest extends AbstractComplianceSuiteTest implements RestTestConstants {
@@ -70,8 +71,10 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest implem
     protected static final NamespaceContext NS_CTXT = new SosNamespaceContext();
 
     protected String link(final String relType, final String resTypeWithOrWithoutId) {
-        return String.format("sosREST:link[@rel='%s' and @href='%s' and @type='%s']", EncodingNamespace + "/"
-                + relType, ServiceUrl + REST_URL + "/" + resTypeWithOrWithoutId, CONTENT_TYPE);
+        return String.format("sosREST:link[@rel='%s' and contains(@href, '%s') and @type='%s']",
+                             EncodingNamespace + "/"+ relType,
+                             REST_URL + "/" + resTypeWithOrWithoutId,
+                             CONTENT_TYPE);
     }
 
     protected Response getResource(final String resType) {
@@ -121,21 +124,21 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest implem
             final double value, final String featureId, final String observableProperty) {
         OMObservationDocument observationDoc = OMObservationDocument.Factory.newInstance();
         OMObservationType observation = observationDoc.addNewOMObservation();
-        
+
         observation.addNewPhenomenonTime().addNewAbstractTimeObject().substitute(new QName("http://www.opengis.net/gml/3.2", "TimePeriod", "gml"), TimePeriodType.type);
         TimePeriodType timePeriodType = TimePeriodType.Factory.newInstance();
         timePeriodType.setId("tp_123");
         timePeriodType.addNewBeginPosition().setStringValue(new DateTime(timestamp).toString());
         timePeriodType.addNewEndPosition().setStringValue(new DateTime(timestamp).toString());
-        
+
         TimeInstantType timeInstant = observation.addNewResultTime().addNewTimeInstant();
         timeInstant.setId("ti_123");
         timeInstant.addNewTimePosition().setStringValue(new DateTime(timestamp).toString());
-        
+
         observation.addNewProcedure().setHref(sensorId);
         observation.addNewObservedProperty().setHref(observableProperty);
         observation.addNewFeatureOfInterest().setHref(featureId);
-        
+
         MeasureType measureType = MeasureType.Factory.newInstance();
         measureType.setUom("test-unit");
         measureType.setDoubleValue(value);
@@ -144,11 +147,11 @@ public abstract class RestBindingTest extends AbstractComplianceSuiteTest implem
                 ObservationDocument.Factory.newInstance();
         final ObservationType restObservation = restObsDoc.addNewObservation();
         restObservation.setOMObservation(observation);
-        
+
         final LinkType link = restObservation.addNewLink();
         link.setType(CONTENT_TYPE);
         link.setRel(EncodingNamespace + "/" + ResourceRelationOfferingGet);
-        link.setHref(ServiceUrl + UrlPattern + "/"
+        link.setHref(/*ServiceUrl + */UrlPattern + "/"
                 + ResourceOfferings + "/" + offeringId);
         return restObsDoc.xmlText();
     }
