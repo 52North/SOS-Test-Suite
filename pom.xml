@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.n52.sensorweb.sos</groupId>
     <artifactId>test-suite</artifactId>
-    <version>1.0.0-M3</version>
+    <version>1.0.0-M4</version>
     <name>52North SOS Integration and Compliance Test Suite</name>
     <inceptionYear>2013</inceptionYear>
     <packaging>pom</packaging>
