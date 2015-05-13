@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.n52.sensorweb.sos</groupId>
     <artifactId>test-suite</artifactId>
-    <version>1.0.0-M5</version>
+    <version>1.0.0-M6</version>
     <name>52North SOS Integration and Compliance Test Suite</name>
     <inceptionYear>2013</inceptionYear>
     <packaging>pom</packaging>
@@ -45,9 +45,9 @@
         </license>
     </licenses>
     <properties>
-        <xml.common.version>1.1.5</xml.common.version>
-        <do.version>0.2.0-SNAPSHOT</do.version>
-        <rest.version>0.2.0-SNAPSHOT</rest.version>
+        <xml.common.version>2.1.0</xml.common.version>
+        <do.version>4.2.0</do.version>
+        <rest.version>4.2.0</rest.version>
         <spring.version>3.2.6.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <logback.version>1.0.13</logback.version>
