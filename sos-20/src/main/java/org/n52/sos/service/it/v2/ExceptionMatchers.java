@@ -19,7 +19,14 @@ import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
 import static org.n52.sos.service.it.util.XPath.hasXPath;
-import static org.n52.sos.service.it.v2.XPaths.*;
+import static org.n52.sos.service.it.v2.XPaths.ENVELOPE_BODY_FAULT_DETAIL_EXCEPTION_EXCEPTION_CODE;
+import static org.n52.sos.service.it.v2.XPaths.ENVELOPE_BODY_FAULT_DETAIL_EXCEPTION_EXCEPTION_TEXT;
+import static org.n52.sos.service.it.v2.XPaths.ENVELOPE_BODY_FAULT_DETAIL_EXCEPTION_LOCATOR;
+import static org.n52.sos.service.it.v2.XPaths.ENVELOPE_BODY_FAULT_DETAIL_EXCEPTION_TEXT;
+import static org.n52.sos.service.it.v2.XPaths.EXCEPTION_CODE;
+import static org.n52.sos.service.it.v2.XPaths.EXCEPTION_LOCATOR;
+import static org.n52.sos.service.it.v2.XPaths.EXCEPTION_TEXT;
+import static org.n52.sos.service.it.v2.XPaths.SOAP_ENVELOPE_BODY_FAULT_CODE_SUBCODE_VALUE;
 
 import org.hamcrest.Matcher;
 import org.n52.sos.service.it.exception.OwsExceptionCode;
@@ -49,7 +56,7 @@ public class ExceptionMatchers {
             final String parameter) {
         return soapFault(OwsExceptionCode.InvalidParameterValue, INVALID_PARAMETER_VALUE,
                          OWSConstants.RequestParams.service,
-                         "The value of the mandatory parameter 'service' must be 'SOS'. Delivered value was: " +
+                         "The value of the mandatory parameter 'service' is invalid. Delivered value was: " +
                          parameter);
     }
 
@@ -94,7 +101,7 @@ public class ExceptionMatchers {
     public static Matcher<Node> invalidServiceParameterValueException(
             String value) {
         String message = String.format(
-                "The value of the mandatory parameter 'service' must be 'SOS'. Delivered value was: %s", value);
+                "The value of the mandatory parameter 'service' is invalid. Delivered value was: %s", value);
         return exception(OwsExceptionCode.InvalidParameterValue, OWSConstants.RequestParams.service, message);
     }
 
