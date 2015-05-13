@@ -14,7 +14,6 @@
  */
 package org.n52.sos.service.it.v2.kvp;
 
-import static org.n52.sos.service.it.ServiceConstants.GET_DATA_AVAILABILITY;
 
 /**
  * Test for KVP SOS 2.0 GetDataAvailability request.

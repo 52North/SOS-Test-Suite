@@ -15,12 +15,7 @@
 package org.n52.sos.service.it.ogc;
 
 import javax.xml.namespace.QName;
-
-
-
 //import org.n52.sos.ogc.swe.SWEConstants;
-
-
 import org.n52.sos.service.it.w3c.SchemaLocation;
 
 public interface SwesConstants {

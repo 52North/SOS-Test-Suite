@@ -43,7 +43,6 @@ import net.opengis.swe.x101.VectorType;
 import net.opengis.swe.x101.VectorType.Coordinate;
 
 import org.joda.time.DateTime;
-
 import org.n52.sos.service.it.AbstractComplianceSuiteTest;
 import org.n52.sos.service.it.Response;
 import org.n52.sos.service.it.v2.SosNamespaceContext;

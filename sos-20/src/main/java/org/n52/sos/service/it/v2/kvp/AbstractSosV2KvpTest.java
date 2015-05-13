@@ -14,13 +14,16 @@
  */
 package org.n52.sos.service.it.v2.kvp;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.*;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueException;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidVersionParameterValueException;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueException;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.missingVersionParameterValueException;
 
 import org.junit.Test;
-import org.n52.sos.service.it.kvp.AbstractKvpComplianceTest;
 import org.n52.sos.service.it.ServiceConstants;
+import org.n52.sos.service.it.kvp.AbstractKvpComplianceTest;
 import org.w3c.dom.Node;
 
 /**

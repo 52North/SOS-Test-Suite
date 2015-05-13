@@ -14,9 +14,10 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
-import static org.hamcrest.Matchers.*;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.*;
-
+import static org.hamcrest.Matchers.is;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidRequestMissingParameterExceptionFault;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
 import net.opengis.swes.x20.ExtensibleRequestType;
 
 import org.apache.xmlbeans.XmlException;

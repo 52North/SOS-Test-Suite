@@ -25,9 +25,8 @@ import net.opengis.sosREST.x10.SensorDocument;
 import org.apache.xmlbeans.XmlException;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.w3c.dom.Node;
-
 import org.n52.sos.service.it.Response;
+import org.w3c.dom.Node;
 
 /**
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk

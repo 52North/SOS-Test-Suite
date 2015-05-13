@@ -15,8 +15,8 @@
 package org.n52.sos.service.it.v2.soap;
 
 import static org.hamcrest.Matchers.is;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.*;
-
+import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
 import net.opengis.sos.x20.GetCapabilitiesDocument;
 import net.opengis.sos.x20.GetCapabilitiesType;
 

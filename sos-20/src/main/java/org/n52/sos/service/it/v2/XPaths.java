@@ -17,7 +17,6 @@ package org.n52.sos.service.it.v2;
 import javax.xml.namespace.NamespaceContext;
 
 import org.n52.sos.service.it.util.XPath;
-import org.n52.sos.service.it.util.XPath;
 
 /**
  * TODO JavaDoc

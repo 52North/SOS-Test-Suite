@@ -14,7 +14,8 @@
  */
 package org.n52.sos.service.it.v2.rest;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.is;
 
 import javax.servlet.http.HttpServletResponse;
 

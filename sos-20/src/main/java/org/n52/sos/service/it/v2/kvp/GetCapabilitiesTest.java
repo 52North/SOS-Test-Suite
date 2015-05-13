@@ -14,12 +14,11 @@
  */
 package org.n52.sos.service.it.v2.kvp;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.n52.sos.service.it.ServiceConstants.GET_CAPABILITIES;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.*;
-import static org.n52.sos.service.it.util.XPath.hasXPath;
-import static org.n52.sos.service.it.v2.XPaths.*;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.exception;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueException;
+import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueException;
 
 import org.junit.Ignore;
 import org.junit.Test;

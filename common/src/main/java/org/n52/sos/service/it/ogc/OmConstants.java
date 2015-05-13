@@ -21,7 +21,6 @@ import java.util.Set;
 
 import javax.xml.namespace.QName;
 
-import org.n52.sos.service.it.ogc.OGCConstants;
 import org.n52.sos.service.it.w3c.SchemaLocation;
 
 /**
