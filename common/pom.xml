@@ -19,10 +19,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
+		<dependency>
+			<groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-        </dependency>
+		</dependency>
         <dependency>
             <groupId>org.n52.sensorweb</groupId>
             <artifactId>52n-xml-soap-v12</artifactId>
