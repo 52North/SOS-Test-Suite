@@ -24,7 +24,7 @@ import org.junit.Test;
  * Test for SOAP SOS 2.0 DeleteSensor request.
  *
  * @author Christian Autermann <c.autermann@52north.org>
- * @author Carsten Hollmann <c.hollmann@52north.org>
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */
 public class DeleteSensorTest extends AbstractSosV2SoapTest {

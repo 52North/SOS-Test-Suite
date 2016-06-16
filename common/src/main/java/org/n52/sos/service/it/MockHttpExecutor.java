@@ -26,7 +26,7 @@ import org.springframework.mock.web.MockServletContext;
  * @author Christian Autermann <c.autermann@52north.org>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
  * J&uuml;rrens</a>
- * @author Carsten Hollmann <c.hollmann@52north.org>
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  */
 public abstract class MockHttpExecutor
         extends ExternalResource
