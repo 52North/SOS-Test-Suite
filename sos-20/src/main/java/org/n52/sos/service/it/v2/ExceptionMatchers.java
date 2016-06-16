@@ -56,7 +56,7 @@ public class ExceptionMatchers {
             final String parameter) {
         return soapFault(OwsExceptionCode.InvalidParameterValue, INVALID_PARAMETER_VALUE,
                          OWSConstants.RequestParams.service,
-                         "The value of the mandatory parameter 'service' must be SOS. Delivered value was: " +
+                         "The value of the mandatory parameter 'service' must be 'SOS'. Delivered value was: " +
                          parameter);
     }
 
@@ -101,7 +101,7 @@ public class ExceptionMatchers {
     public static Matcher<Node> invalidServiceParameterValueException(
             String value) {
         String message = String.format(
-                "The value of the mandatory parameter 'service' must be SOS. Delivered value was: %s", value);
+                "The value of the mandatory parameter 'service' must be 'SOS'. Delivered value was: %s", value);
         return exception(OwsExceptionCode.InvalidParameterValue, OWSConstants.RequestParams.service, message);
     }
 
