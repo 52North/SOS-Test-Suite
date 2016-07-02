@@ -33,7 +33,7 @@ import org.w3c.dom.Node;
  * Test for KVP SOS 2.0 GetCapabilities request.
  *
  * @author Christian Autermann <c.autermann@52north.org>
- * @author Carsten Hollmann <c.hollmann@52north.org>
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */
 public class GetCapabilitiesTest extends AbstractSosV2KvpTest {

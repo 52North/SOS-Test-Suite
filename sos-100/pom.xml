@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52.sensorweb.sos</groupId>
         <artifactId>test-suite</artifactId>
-        <version>1.0.0-M6</version>
+        <version>1.0.0-M7</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>test-suite-sos-100</artifactId>
