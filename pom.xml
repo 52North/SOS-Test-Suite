@@ -45,13 +45,12 @@
         </license>
     </licenses>
     <properties>
-        <xml.common.version>2.1.0</xml.common.version>
-        <do.version>4.2.0</do.version>
-        <rest.version>4.2.0</rest.version>
-        <spring.version>3.2.6.RELEASE</spring.version>
+        <xml.common.version>2.5.0</xml.common.version>
+		<rest.version>4.4.2</rest.version>
+        <spring.version>4.2.5.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <logback.version>1.0.13</logback.version>
-        <slf4j.version>1.7.2</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <slf4j.version>1.7.25</slf4j.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -83,7 +82,7 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
+                <version>4.0.1</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -121,12 +120,12 @@
 			<dependency>
 				<groupId>org.n52.sensorweb</groupId>
 				<artifactId>52n-xml-sosdo-v10</artifactId>
-				<version>2.1.1-SNAPSHOT</version>
+				<version>${xml.common.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.n52.sensorweb</groupId>
 				<artifactId>52n-xml-sosdo-v20</artifactId>
-				<version>2.1.1-SNAPSHOT</version>
+				<version>${xml.common.version}</version>
 			</dependency>
             <dependency>
                 <groupId>org.n52.sensorweb.sos</groupId>
@@ -136,7 +135,7 @@
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.2</version>
+                <version>2.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -172,7 +171,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
