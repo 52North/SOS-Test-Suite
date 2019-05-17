@@ -16,6 +16,9 @@ package org.n52.sos.service.it.v2.soap;
 
 import javax.xml.namespace.QName;
 
+import org.apache.xmlbeans.XmlException;
+import org.junit.Test;
+
 import net.opengis.om.x20.OMObservationType;
 import net.opengis.sos.x20.InsertResultTemplateDocument;
 import net.opengis.sos.x20.InsertResultTemplateType;
@@ -27,13 +30,10 @@ import net.opengis.swe.x20.TextEncodingDocument;
 import net.opengis.swe.x20.TextEncodingType;
 import net.opengis.swe.x20.TextType;
 
-import org.apache.xmlbeans.XmlException;
-import org.junit.Test;
-
 /**
  * Test for SOAP SOS 2.0 InsertResultTemplate request.
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */

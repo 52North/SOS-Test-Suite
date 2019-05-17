@@ -31,7 +31,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 class MockHttpClient implements Client {
     private ServletContext context = null;

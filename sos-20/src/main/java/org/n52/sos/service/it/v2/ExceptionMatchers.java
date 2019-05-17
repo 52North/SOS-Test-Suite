@@ -29,15 +29,15 @@ import static org.n52.sos.service.it.v2.XPaths.EXCEPTION_TEXT;
 import static org.n52.sos.service.it.v2.XPaths.SOAP_ENVELOPE_BODY_FAULT_CODE_SUBCODE_VALUE;
 
 import org.hamcrest.Matcher;
-import org.n52.sos.service.it.exception.OwsExceptionCode;
-import org.n52.sos.service.it.exception.SwesExceptionCode;
-import org.n52.sos.service.it.ogc.OWSConstants;
+import org.n52.shetland.ogc.ows.OWSConstants;
+import org.n52.shetland.ogc.ows.exception.OwsExceptionCode;
+import org.n52.shetland.ogc.swes.exception.SwesExceptionCode;
 import org.w3c.dom.Node;
 
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class ExceptionMatchers {
     private static final String INVALID_PARAMETER_VALUE =

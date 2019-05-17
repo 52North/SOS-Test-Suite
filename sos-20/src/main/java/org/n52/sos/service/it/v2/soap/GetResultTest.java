@@ -14,16 +14,16 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
-import net.opengis.sos.x20.GetResultDocument;
-import net.opengis.sos.x20.GetResultType;
-
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
+
+import net.opengis.sos.x20.GetResultDocument;
+import net.opengis.sos.x20.GetResultType;
 
 /**
  * Test for SOAP SOS 2.0 GetResult request.
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */

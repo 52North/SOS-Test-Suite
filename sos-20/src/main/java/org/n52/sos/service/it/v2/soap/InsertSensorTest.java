@@ -14,16 +14,16 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
-import net.opengis.swes.x20.InsertSensorDocument;
-
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
 import org.n52.sos.service.it.v2.RequestBuilder;
 
+import net.opengis.swes.x20.InsertSensorDocument;
+
 /**
  * Test for SOAP SOS 2.0 InsertSensor request.
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
  * J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>

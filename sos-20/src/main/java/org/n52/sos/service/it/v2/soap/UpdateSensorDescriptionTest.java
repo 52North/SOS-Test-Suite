@@ -14,6 +14,9 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
+import org.apache.xmlbeans.XmlException;
+import org.junit.Test;
+
 import net.opengis.sensorML.x101.SensorMLDocument;
 import net.opengis.sensorML.x101.SensorMLDocument.SensorML;
 import net.opengis.sensorML.x101.SystemDocument;
@@ -21,13 +24,10 @@ import net.opengis.sensorML.x101.SystemType;
 import net.opengis.swes.x20.UpdateSensorDescriptionDocument;
 import net.opengis.swes.x20.UpdateSensorDescriptionType;
 
-import org.apache.xmlbeans.XmlException;
-import org.junit.Test;
-
 /**
  * Test for SOAP SOS 2.0 UpdateSensorDescription request.
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */

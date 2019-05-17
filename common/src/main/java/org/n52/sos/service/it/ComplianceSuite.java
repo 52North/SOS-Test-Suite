@@ -17,7 +17,7 @@ package org.n52.sos.service.it;
 import org.junit.runner.RunWith;
 
 /**
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 @RunWith(ComplianceSuiteRunner.class)
 public interface ComplianceSuite {

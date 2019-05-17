@@ -20,7 +20,7 @@ import org.junit.rules.ErrorCollector;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public abstract class AbstractComplianceSuiteTest implements ComplianceSuiteTest {
     private RequestExecutor executor;

@@ -19,11 +19,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 
 import org.junit.rules.ExternalResource;
+import org.n52.iceland.service.Service;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 
 /**
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
  * J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
@@ -43,10 +44,10 @@ public abstract class MockHttpExecutor
         this.servletFactory = servletFactory;
     }
 
-    public MockHttpExecutor(final Class<? extends HttpServlet> klass) {
+    public MockHttpExecutor(final Class<? extends Service> klass) {
         this.servletFactory = new ServletFactory() {
             @Override
-            public HttpServlet create() {
+            public Service create() {
                 try {
                     return klass.newInstance();
                 } catch (InstantiationException ex) {

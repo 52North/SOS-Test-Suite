@@ -36,7 +36,7 @@ import org.xml.sax.SAXException;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class MockHttpResponse extends MockHttpServletResponse
         implements Response {

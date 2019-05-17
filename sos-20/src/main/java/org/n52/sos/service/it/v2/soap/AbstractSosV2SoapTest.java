@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.is;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidRequestMissingParameterExceptionFault;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
-import net.opengis.swes.x20.ExtensibleRequestType;
 
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
@@ -26,6 +25,8 @@ import org.junit.Test;
 import org.n52.sos.service.it.Response;
 import org.n52.sos.service.it.ServiceConstants;
 import org.n52.sos.service.it.soap.AbstractSoapComplianceTest;
+
+import net.opengis.swes.x20.ExtensibleRequestType;
 
 /**
  * Abstract class for SOS 2.0 SOAP request tests

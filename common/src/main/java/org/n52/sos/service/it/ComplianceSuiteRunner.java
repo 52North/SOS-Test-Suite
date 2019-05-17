@@ -24,7 +24,7 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 
 /**
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class ComplianceSuiteRunner extends Suite {
     public ComplianceSuiteRunner(Class<?> klass) throws InitializationError {

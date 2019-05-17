@@ -21,7 +21,7 @@ import org.n52.sos.service.it.util.XPath;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class XPaths {
     public static final NamespaceContext CTX = new SosNamespaceContext();

@@ -21,7 +21,7 @@ import org.n52.sos.service.it.Response;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class AbstractPoxComplianceTest extends AbstractComplianceSuiteTest {
     public static final String APPLICATION_XML = "application/xml";

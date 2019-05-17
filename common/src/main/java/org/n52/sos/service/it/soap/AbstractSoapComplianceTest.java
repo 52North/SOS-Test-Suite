@@ -22,7 +22,7 @@ import org.w3.x2003.x05.soapEnvelope.EnvelopeDocument;
 /**
  * Abstract class for SOS SOAP requests tests
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
  * J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>

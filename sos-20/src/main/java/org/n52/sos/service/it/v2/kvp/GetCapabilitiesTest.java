@@ -22,17 +22,16 @@ import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParamete
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.n52.sos.service.it.exception.OwsExceptionCode;
-import org.n52.sos.service.it.ogc.OWSConstants;
-import org.n52.sos.service.it.ogc.SosConstants;
-import org.n52.sos.service.it.ogc.SosConstants.GetCapabilitiesParams;
+import org.n52.shetland.ogc.ows.OWSConstants;
+import org.n52.shetland.ogc.ows.OWSConstants.GetCapabilitiesParams;
+import org.n52.shetland.ogc.ows.exception.OwsExceptionCode;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
  * Test for KVP SOS 2.0 GetCapabilities request.
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */
@@ -90,7 +89,7 @@ public class GetCapabilitiesTest extends AbstractSosV2KvpTest {
         Node node = kvp()
                 .query(OWSConstants.RequestParams.request, getRequest())
                 .query(OWSConstants.RequestParams.service, SERVICE)
-                .query(SosConstants.GetCapabilitiesParams.Sections, "")
+                .query(OWSConstants.GetCapabilitiesParams.Sections, "")
                 .response().asNode();
         assertThat(
                 node,

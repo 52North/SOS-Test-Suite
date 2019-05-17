@@ -17,17 +17,18 @@ package org.n52.sos.service.it.v2.soap;
 import static org.hamcrest.Matchers.is;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
 import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
-import net.opengis.sos.x20.GetCapabilitiesDocument;
-import net.opengis.sos.x20.GetCapabilitiesType;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
 import org.n52.sos.service.it.Response;
 
+import net.opengis.sos.x20.GetCapabilitiesDocument;
+import net.opengis.sos.x20.GetCapabilitiesType;
+
 /**
  * Test for SOAP SOS 2.0 GetCapabilities request.
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */

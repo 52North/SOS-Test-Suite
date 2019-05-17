@@ -16,6 +16,11 @@ package org.n52.sos.service.it.v2;
 
 import javax.xml.namespace.QName;
 
+import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.XmlString;
+import org.n52.shetland.ogc.om.OmConstants;
+import org.n52.shetland.ogc.sensorML.SensorMLConstants;
+
 import net.opengis.gml.x32.TimeInstantDocument;
 import net.opengis.gml.x32.TimeInstantType;
 import net.opengis.om.x20.OMObservationType;
@@ -27,15 +32,10 @@ import net.opengis.sos.x20.InsertObservationType;
 import net.opengis.swes.x20.InsertSensorDocument;
 import net.opengis.swes.x20.InsertSensorType;
 
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlString;
-import org.n52.sos.service.it.ogc.OmConstants;
-import org.n52.sos.service.it.ogc.SensorMLConstants;
-
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class RequestBuilder {
     private RequestBuilder() {

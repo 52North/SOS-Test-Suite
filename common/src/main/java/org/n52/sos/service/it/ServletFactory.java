@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public interface ServletFactory {
     HttpServlet create();

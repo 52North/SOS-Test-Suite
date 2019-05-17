@@ -20,7 +20,7 @@ import org.n52.sos.service.it.pox.AbstractPoxComplianceTest;
 /**
  * Abstract class for SOS 2.0 POX request tests
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @since 4.0.0
  *
  */

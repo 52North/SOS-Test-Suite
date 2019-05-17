@@ -29,7 +29,7 @@ import org.junit.runners.model.TestClass;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class ComplianceSuiteTestRunner extends BlockJUnit4ClassRunner {
     private final ComplianceSuite parent;

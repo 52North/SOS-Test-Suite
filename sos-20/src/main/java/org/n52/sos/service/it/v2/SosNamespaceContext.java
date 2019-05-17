@@ -21,10 +21,10 @@ import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
 
-import org.n52.sos.service.it.util.CollectionHelper;
+import org.n52.shetland.util.CollectionHelper;
 
 /**
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 public class SosNamespaceContext implements NamespaceContext {
     private final Map<String, String> prefixForNamespace;
