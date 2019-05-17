@@ -18,7 +18,6 @@ import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
 
 import net.opengis.sos.x20.GetFeatureOfInterestDocument;
-import net.opengis.sos.x20.GetFeatureOfInterestType;
 
 /**
  * Test for SOAP SOS 2.0 GetFeatureOfInterest request.
@@ -55,7 +54,7 @@ public class GetFeatureOfInterestTest extends AbstractSosV2SoapTest {
 
     protected GetFeatureOfInterestDocument getRequest() {
         GetFeatureOfInterestDocument getFeatureOfInterestDocument = GetFeatureOfInterestDocument.Factory.newInstance();
-        GetFeatureOfInterestType getFeatureOfInterestType = getFeatureOfInterestDocument.addNewGetFeatureOfInterest();
+        getFeatureOfInterestDocument.addNewGetFeatureOfInterest();
         return getFeatureOfInterestDocument;
     }
 

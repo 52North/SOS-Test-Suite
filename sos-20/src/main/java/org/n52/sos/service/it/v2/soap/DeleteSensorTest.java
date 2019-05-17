@@ -31,7 +31,7 @@ public class DeleteSensorTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        DeleteSensorDocument deleteSensorDocument = getRequest("procedure");
+        DeleteSensorDocument deleteSensorDocument = getRequest(PROCEDURE_PARAMETER);
         addVersionParameter(deleteSensorDocument.getDeleteSensor());
         missingServiceParameter(deleteSensorDocument.getDeleteSensor(), deleteSensorDocument);
     }
@@ -39,7 +39,7 @@ public class DeleteSensorTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        DeleteSensorDocument deleteSensorDocument = getRequest("procedure");
+        DeleteSensorDocument deleteSensorDocument = getRequest(PROCEDURE_PARAMETER);
         addVersionParameter(deleteSensorDocument.getDeleteSensor());
         emptyServiceParameter(deleteSensorDocument.getDeleteSensor(), deleteSensorDocument);
     }
@@ -47,16 +47,14 @@ public class DeleteSensorTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void invalidServiceParameter() throws XmlException {
-        DeleteSensorDocument deleteSensorDocument = getRequest("procedure");
+        DeleteSensorDocument deleteSensorDocument = getRequest(PROCEDURE_PARAMETER);
         addVersionParameter(deleteSensorDocument.getDeleteSensor());
         invalidServiceParameter(deleteSensorDocument.getDeleteSensor(), deleteSensorDocument);
     }
 
     protected DeleteSensorDocument getRequest(String procedure) {
-        DeleteSensorDocument deleteSensorDocument = DeleteSensorDocument.Factory
-                .newInstance();
-        DeleteSensorType deleteSensorType = deleteSensorDocument
-                .addNewDeleteSensor();
+        DeleteSensorDocument deleteSensorDocument = DeleteSensorDocument.Factory.newInstance();
+        DeleteSensorType deleteSensorType = deleteSensorDocument.addNewDeleteSensor();
         deleteSensorType.setProcedure(procedure);
         return deleteSensorDocument;
     }

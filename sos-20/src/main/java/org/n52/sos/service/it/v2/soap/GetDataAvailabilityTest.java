@@ -14,15 +14,13 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
-import static org.hamcrest.Matchers.is;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
-
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
+import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.n52.sos.service.it.Response;
+import org.n52.sos.service.it.v2.ExceptionMatchers;
 
 /**
  * Test for SOAP SOS 2.0 GetDataAvailability request.
@@ -38,7 +36,8 @@ public class GetDataAvailabilityTest extends AbstractSosV2SoapTest {
     public void missingServiceParameter() throws XmlException {
         // XmlObject getDataAvailabilityDocument =
         // XmlObject.Factory
-        // .parse("<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" version=\"2.0.0\"/>");
+        // .parse("<sos:GetDataAvailability
+        // xmlns:sos=\"http://www.opengis.net/sos/2.0\" version=\"2.0.0\"/>");
         // MockHttpServletResponse res = execute(getDataAvailabilityDocument);
         // assertThat(res.getStatus(), is(400));
         // assertThat(getResponseAsNode(res),
@@ -48,25 +47,25 @@ public class GetDataAvailabilityTest extends AbstractSosV2SoapTest {
     @Test
     @Override
     public void emptyServiceParameter() throws XmlException {
-        XmlObject getDataAvailabilityDocument =
-                XmlObject.Factory
-                .parse("<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" service=\"\" version=\"2.0.0\"/>");
+        XmlObject getDataAvailabilityDocument = XmlObject.Factory.parse(
+                "<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" "
+                + "service=\"\" version=\"2.0.0\"/>");
         Response res = soap(getDataAvailabilityDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
-        getErrors()
-                .checkThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
+        getErrors().checkThat(res.asNode(),
+                Matchers.is(ExceptionMatchers.missingServiceParameterValueExceptionFault()));
     }
 
     @Test
     @Override
     public void invalidServiceParameter() throws XmlException {
 
-        XmlObject getDataAvailabilityDocument =
-                XmlObject.Factory
-                .parse("<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" service=\"INVALID\" version=\"2.0.0\"/>");
+        XmlObject getDataAvailabilityDocument = XmlObject.Factory.parse(
+                "<sos:GetDataAvailability xmlns:sos=\"http://www.opengis.net/sos/2.0\" "
+                + "service=\"INVALID\" version=\"2.0.0\"/>");
         Response res = soap(getDataAvailabilityDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
-        getErrors()
-                .checkThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
+        getErrors().checkThat(res.asNode(),
+                Matchers.is(ExceptionMatchers.invalidServiceParameterValueExceptionFault("INVALID")));
     }
 }

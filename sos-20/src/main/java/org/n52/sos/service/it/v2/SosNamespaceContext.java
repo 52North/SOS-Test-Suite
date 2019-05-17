@@ -28,6 +28,7 @@ import org.n52.shetland.util.CollectionHelper;
  */
 public class SosNamespaceContext implements NamespaceContext {
     private final Map<String, String> prefixForNamespace;
+
     private final Map<String, String> namespaceForPrefix;
 
     public SosNamespaceContext() {

@@ -31,8 +31,7 @@ public class GetResultTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        GetResultDocument getResultDocument =
-                getRequest("offering", "observedProperty");
+        GetResultDocument getResultDocument = getRequest(OFFERING_PARAMETER, OBSERVED_PROPERTY_PARAMETER);
         addVersionParameter(getResultDocument.getGetResult());
         missingServiceParameter(getResultDocument.getGetResult(), getResultDocument);
     }
@@ -40,8 +39,7 @@ public class GetResultTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        GetResultDocument getResultDocument =
-                getRequest("offering", "observedProperty");
+        GetResultDocument getResultDocument = getRequest(OFFERING_PARAMETER, OBSERVED_PROPERTY_PARAMETER);
         addVersionParameter(getResultDocument.getGetResult());
         emptyServiceParameter(getResultDocument.getGetResult(), getResultDocument);
     }
@@ -49,19 +47,16 @@ public class GetResultTest extends AbstractSosV2SoapTest {
     @Test
     @Override
     public void invalidServiceParameter() throws XmlException {
-        GetResultDocument getResultDocument =
-                getRequest("offering", "observedProperty");
+        GetResultDocument getResultDocument = getRequest(OFFERING_PARAMETER, OBSERVED_PROPERTY_PARAMETER);
         addVersionParameter(getResultDocument.getGetResult());
         invalidServiceParameter(getResultDocument.getGetResult(), getResultDocument);
     }
 
-    protected GetResultDocument getRequest(String offering,
-                                           String observedProperty) {
-        GetResultDocument getResultDocument = GetResultDocument.Factory
-                .newInstance();
+    protected GetResultDocument getRequest(String offering, String observedProperty) {
+        GetResultDocument getResultDocument = GetResultDocument.Factory.newInstance();
         GetResultType getResultType = getResultDocument.addNewGetResult();
-        getResultType.setOffering("offering");
-        getResultType.setObservedProperty("observedProperty");
+        getResultType.setOffering(OFFERING_PARAMETER);
+        getResultType.setObservedProperty(OBSERVED_PROPERTY_PARAMETER);
         return getResultDocument;
     }
 }

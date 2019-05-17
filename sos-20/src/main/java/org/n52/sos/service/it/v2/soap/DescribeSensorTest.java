@@ -32,7 +32,7 @@ public class DescribeSensorTest extends AbstractSosV2SoapTest {
     @Test
     public void missingServiceParameter() throws XmlException {
         DescribeSensorDocument describeSensorDocument =
-                getRequest("procedure", "procedureDescriptionFormat");
+                getRequest(PROCEDURE_PARAMETER, PROCEDURE_DESCRIPTION_FORMAT_PARAMETER);
         addVersionParameter(describeSensorDocument.getDescribeSensor());
         missingServiceParameter(describeSensorDocument.getDescribeSensor(), describeSensorDocument);
     }
@@ -41,7 +41,7 @@ public class DescribeSensorTest extends AbstractSosV2SoapTest {
     @Test
     public void emptyServiceParameter() throws XmlException {
         DescribeSensorDocument describeSensorDocument =
-                getRequest("procedure", "procedureDescriptionFormat");
+                getRequest(PROCEDURE_PARAMETER, PROCEDURE_DESCRIPTION_FORMAT_PARAMETER);
         addVersionParameter(describeSensorDocument.getDescribeSensor());
         emptyServiceParameter(describeSensorDocument.getDescribeSensor(), describeSensorDocument);
     }
@@ -50,20 +50,16 @@ public class DescribeSensorTest extends AbstractSosV2SoapTest {
     @Test
     public void invalidServiceParameter() throws XmlException {
         DescribeSensorDocument describeSensorDocument =
-                getRequest("procedure", "procedureDescriptionFormat");
+                getRequest(PROCEDURE_PARAMETER, PROCEDURE_DESCRIPTION_FORMAT_PARAMETER);
         addVersionParameter(describeSensorDocument.getDescribeSensor());
         invalidServiceParameter(describeSensorDocument.getDescribeSensor(), describeSensorDocument);
     }
 
-    protected DescribeSensorDocument getRequest(String procedure,
-                                                String procedureDescriptionFormat) {
-        DescribeSensorDocument describeSensorDocument =
-                DescribeSensorDocument.Factory.newInstance();
-        DescribeSensorType describeSensorType = describeSensorDocument
-                .addNewDescribeSensor();
+    protected DescribeSensorDocument getRequest(String procedure, String procedureDescriptionFormat) {
+        DescribeSensorDocument describeSensorDocument = DescribeSensorDocument.Factory.newInstance();
+        DescribeSensorType describeSensorType = describeSensorDocument.addNewDescribeSensor();
         describeSensorType.setProcedure(procedure);
-        describeSensorType
-                .setProcedureDescriptionFormat(procedureDescriptionFormat);
+        describeSensorType.setProcedureDescriptionFormat(procedureDescriptionFormat);
         return describeSensorDocument;
     }
 }

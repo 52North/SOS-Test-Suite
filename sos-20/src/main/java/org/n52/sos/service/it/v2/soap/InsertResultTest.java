@@ -32,7 +32,7 @@ public class InsertResultTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        InsertResultDocument insertResultDocument = getRequest("template");
+        InsertResultDocument insertResultDocument = getRequest(TEMPLATE_PARAMETER);
         addVersionParameter(insertResultDocument.getInsertResult());
         missingServiceParameter(insertResultDocument.getInsertResult(), insertResultDocument);
     }
@@ -40,7 +40,7 @@ public class InsertResultTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        InsertResultDocument insertResultDocument = getRequest("template");
+        InsertResultDocument insertResultDocument = getRequest(TEMPLATE_PARAMETER);
         addVersionParameter(insertResultDocument.getInsertResult());
         emptyServiceParameter(insertResultDocument.getInsertResult(), insertResultDocument);
     }
@@ -48,20 +48,17 @@ public class InsertResultTest extends AbstractSosV2SoapTest {
     @Test
     @Override
     public void invalidServiceParameter() throws XmlException {
-        InsertResultDocument insertResultDocument = getRequest("template");
+        InsertResultDocument insertResultDocument = getRequest(TEMPLATE_PARAMETER);
         addVersionParameter(insertResultDocument.getInsertResult());
         invalidServiceParameter(insertResultDocument.getInsertResult(), insertResultDocument);
 
     }
 
     public InsertResultDocument getRequest(String template) {
-        InsertResultDocument insertResultDocument = InsertResultDocument.Factory
-                .newInstance();
-        InsertResultType insertResultType = insertResultDocument
-                .addNewInsertResult();
+        InsertResultDocument insertResultDocument = InsertResultDocument.Factory.newInstance();
+        InsertResultType insertResultType = insertResultDocument.addNewInsertResult();
         insertResultType.setTemplate(template);
-        insertResultType.addNewResultValues().set(XmlString.Factory
-                .newValue("values"));
+        insertResultType.addNewResultValues().set(XmlString.Factory.newValue("values"));
         return insertResultDocument;
     }
 }

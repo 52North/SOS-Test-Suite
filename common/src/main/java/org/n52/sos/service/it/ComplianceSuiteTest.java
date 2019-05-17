@@ -23,5 +23,5 @@ import org.junit.runner.RunWith;
  */
 @RunWith(ComplianceSuiteTestRunner.class)
 public interface ComplianceSuiteTest {
-    public void setExecutor(RequestExecutor executor);
+    void setExecutor(RequestExecutor executor);
 }

@@ -33,19 +33,16 @@ public class DeleteObservationTest extends AbstractSosV2SoapTest {
     @Override
     @Ignore("currently not supported due to some validation issues")
     public void missingServiceParameter() throws XmlException {
-        DeleteObservationDocument deleteObservationDocument =
-                getRequest("observation");
+        DeleteObservationDocument deleteObservationDocument = getRequest(OBSERVATION_PARAMETER);
         addVersionParameter(deleteObservationDocument.getDeleteObservation());
-        missingServiceParameter(deleteObservationDocument.getDeleteObservation(),
-                                deleteObservationDocument);
+        missingServiceParameter(deleteObservationDocument.getDeleteObservation(), deleteObservationDocument);
     }
 
     @Test
     @Override
     @Ignore("REVIEW: Returns NoApplicableCode instead of InvalidParameterValue")
     public void emptyServiceParameter() throws XmlException {
-        DeleteObservationDocument deleteObservationDocument =
-                getRequest("observation");
+        DeleteObservationDocument deleteObservationDocument = getRequest(OBSERVATION_PARAMETER);
         addVersionParameter(deleteObservationDocument.getDeleteObservation());
         invalidServiceParameter(deleteObservationDocument.getDeleteObservation(), deleteObservationDocument);
     }
@@ -54,19 +51,15 @@ public class DeleteObservationTest extends AbstractSosV2SoapTest {
     @Override
     @Ignore("REVIEW: Returns NoApplicableCode instead of InvalidParameterValue")
     public void invalidServiceParameter() throws XmlException {
-        DeleteObservationDocument deleteObservationDocument =
-                getRequest("observation");
+        DeleteObservationDocument deleteObservationDocument = getRequest(OBSERVATION_PARAMETER);
         addVersionParameter(deleteObservationDocument.getDeleteObservation());
-        invalidServiceParameter(deleteObservationDocument.getDeleteObservation(),
-                                deleteObservationDocument);
+        invalidServiceParameter(deleteObservationDocument.getDeleteObservation(), deleteObservationDocument);
     }
 
     protected DeleteObservationDocument getRequest(String observation) {
-        DeleteObservationDocument deleteObservationDocument =
-                DeleteObservationDocument.Factory.newInstance();
-        DeleteObservationType deleteObservationType = deleteObservationDocument
-                .addNewDeleteObservation();
-        deleteObservationType.setObservation("observation");
+        DeleteObservationDocument deleteObservationDocument = DeleteObservationDocument.Factory.newInstance();
+        DeleteObservationType deleteObservationType = deleteObservationDocument.addNewDeleteObservation();
+        deleteObservationType.setObservation(OBSERVATION_PARAMETER);
         return deleteObservationDocument;
     }
 }

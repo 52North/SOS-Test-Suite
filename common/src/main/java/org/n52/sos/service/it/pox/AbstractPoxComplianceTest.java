@@ -27,11 +27,7 @@ public class AbstractPoxComplianceTest extends AbstractComplianceSuiteTest {
     public static final String APPLICATION_XML = "application/xml";
 
     protected Response pox(XmlObject xml) {
-        return getExecutor()
-                .pox()
-                .accept(APPLICATION_XML)
-                .contentType(APPLICATION_XML)
-                .entity(xml.xmlText())
+        return getExecutor().pox().accept(APPLICATION_XML).contentType(APPLICATION_XML).entity(xml.xmlText())
                 .response();
     }
 }

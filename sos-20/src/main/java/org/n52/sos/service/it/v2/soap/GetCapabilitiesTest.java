@@ -14,9 +14,8 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
-import static org.hamcrest.Matchers.is;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
+import org.hamcrest.Matchers;
+import org.n52.sos.service.it.v2.ExceptionMatchers;
 
 import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
@@ -33,49 +32,43 @@ import net.opengis.sos.x20.GetCapabilitiesType;
  * @since 4.0.0
  */
 public class GetCapabilitiesTest extends AbstractSosV2SoapTest {
+
+    private static final String VERSION = "2.0.0";
+
     @Test
     @Override
     public void missingServiceParameter() throws XmlException {
-        GetCapabilitiesDocument getCapabilitiesDocument =
-                GetCapabilitiesDocument.Factory.newInstance();
-        GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument
-                .addNewGetCapabilities2();
-        getCapabilitiesType.addNewAcceptVersions().addNewVersion()
-                .setStringValue("2.0.0");
+        GetCapabilitiesDocument getCapabilitiesDocument = GetCapabilitiesDocument.Factory.newInstance();
+        GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument.addNewGetCapabilities2();
+        getCapabilitiesType.addNewAcceptVersions().addNewVersion().setStringValue(VERSION);
         Response res = soap(getCapabilitiesDocument);
-        getErrors().checkThat(res.getStatus(), is(200));
+        getErrors().checkThat(res.getStatus(), Matchers.is(200));
         // TODO check if response is a sos:Capabilities document
     }
 
     @Test
     @Override
     public void emptyServiceParameter() throws XmlException {
-        GetCapabilitiesDocument getCapabilitiesDocument =
-                GetCapabilitiesDocument.Factory.newInstance();
-        GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument
-                .addNewGetCapabilities2();
-        getCapabilitiesType.addNewAcceptVersions().addNewVersion()
-                .setStringValue("2.0.0");
+        GetCapabilitiesDocument getCapabilitiesDocument = GetCapabilitiesDocument.Factory.newInstance();
+        GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument.addNewGetCapabilities2();
+        getCapabilitiesType.addNewAcceptVersions().addNewVersion().setStringValue(VERSION);
         getCapabilitiesType.setService("");
         Response res = soap(getCapabilitiesDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
         getErrors().checkThat(res.asNode(),
-                              is(missingServiceParameterValueExceptionFault()));
+                Matchers.is(ExceptionMatchers.missingServiceParameterValueExceptionFault()));
     }
 
     @Test
     @Override
     public void invalidServiceParameter() throws XmlException {
-        GetCapabilitiesDocument getCapabilitiesDocument =
-                GetCapabilitiesDocument.Factory.newInstance();
-        GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument
-                .addNewGetCapabilities2();
-        getCapabilitiesType.addNewAcceptVersions().addNewVersion()
-                .setStringValue("2.0.0");
-        getCapabilitiesType.setService("INVALID");
+        GetCapabilitiesDocument getCapabilitiesDocument = GetCapabilitiesDocument.Factory.newInstance();
+        GetCapabilitiesType getCapabilitiesType = getCapabilitiesDocument.addNewGetCapabilities2();
+        getCapabilitiesType.addNewAcceptVersions().addNewVersion().setStringValue(VERSION);
+        getCapabilitiesType.setService(INVALID);
         Response res = soap(getCapabilitiesDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
         getErrors().checkThat(res.asNode(),
-                              is(invalidServiceParameterValueExceptionFault("INVALID")));
+                Matchers.is(ExceptionMatchers.invalidServiceParameterValueExceptionFault(INVALID)));
     }
 }

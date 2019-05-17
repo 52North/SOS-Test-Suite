@@ -18,7 +18,6 @@ import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
 
 import net.opengis.sos.x20.GetObservationDocument;
-import net.opengis.sos.x20.GetObservationType;
 
 /**
  * Test for SOAP SOS 2.0 GetObservation request.
@@ -54,7 +53,7 @@ public class GetObservationTest extends AbstractSosV2SoapTest {
 
     protected GetObservationDocument getRequest() {
         GetObservationDocument getObservationDocument = GetObservationDocument.Factory.newInstance();
-        GetObservationType getObservationType = getObservationDocument.addNewGetObservation();
+        getObservationDocument.addNewGetObservation();
         return getObservationDocument;
     }
 }

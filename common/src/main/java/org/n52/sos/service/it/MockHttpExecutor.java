@@ -26,18 +26,18 @@ import org.springframework.mock.web.MockServletContext;
 /**
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
- * J&uuml;rrens</a>
+ *         J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  */
-public abstract class MockHttpExecutor
-        extends ExternalResource
-        implements RequestExecutor {
+public abstract class MockHttpExecutor extends ExternalResource implements RequestExecutor {
     public static final String ENCODING = "UTF-8";
+
     private final ServletFactory servletFactory;
-    private final ServletContext servletContext =
-            new MockServletContext();
-    private final ServletConfig servletConfig =
-            new MockServletConfig(servletContext);
+
+    private final ServletContext servletContext = new MockServletContext();
+
+    private final ServletConfig servletConfig = new MockServletConfig(servletContext);
+
     private HttpServlet servlet;
 
     public MockHttpExecutor(ServletFactory servletFactory) {

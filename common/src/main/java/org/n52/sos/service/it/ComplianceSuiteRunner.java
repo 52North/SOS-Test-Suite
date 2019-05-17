@@ -31,13 +31,11 @@ public class ComplianceSuiteRunner extends Suite {
         super(runnerBuilder(klass), klass, getTestClasses(klass));
     }
 
-    private static Class[] getTestClasses(Class<?> klass) throws
-            InitializationError {
+    private static Class[] getTestClasses(Class<?> klass) throws InitializationError {
         return instantiate(klass).getTests();
     }
 
-    private static ComplianceSuite instantiate(Class<?> klass) throws
-            InitializationError {
+    private static ComplianceSuite instantiate(Class<?> klass) throws InitializationError {
         if (ComplianceSuite.class.isAssignableFrom(klass)) {
             try {
                 return (ComplianceSuite) klass.newInstance();
@@ -47,25 +45,19 @@ public class ComplianceSuiteRunner extends Suite {
                 throw new InitializationError(ex);
             }
         } else {
-            throw new InitializationError(String
-                    .format("Class %s has to instance of %s", klass, ComplianceSuite.class));
+            throw new InitializationError(
+                    String.format("Class %s has to instance of %s", klass, ComplianceSuite.class));
         }
     }
 
-    private static RunnerBuilder runnerBuilder(Class<?> klass)
-            throws InitializationError {
+    private static RunnerBuilder runnerBuilder(Class<?> klass) throws InitializationError {
         final ComplianceSuite parent = instantiate(klass);
         final RequestExecutor executor = parent.getExecutor();
         return new AllDefaultPossibilitiesBuilder(true) {
             @Override
             public Runner runnerForClass(Class<?> testClass) throws Throwable {
-                List<RunnerBuilder> builders = Arrays.asList(
-                        ignoredBuilder(),
-                        annotatedBuilder(),
-                        suiteMethodBuilder(),
-                        junit3Builder(),
-                        executorInjectingBuilder(),
-                        junit4Builder());
+                List<RunnerBuilder> builders = Arrays.asList(ignoredBuilder(), annotatedBuilder(),
+                        suiteMethodBuilder(), junit3Builder(), executorInjectingBuilder(), junit4Builder());
 
                 for (RunnerBuilder each : builders) {
                     Runner runner = each.safeRunnerForClass(testClass);
@@ -80,10 +72,8 @@ public class ComplianceSuiteRunner extends Suite {
                 return new RunnerBuilder() {
                     @Override
                     @SuppressWarnings("unchecked")
-                    public Runner runnerForClass(Class<?> testClass)
-                            throws Throwable {
-                        if (ComplianceSuiteTest.class
-                                .isAssignableFrom(testClass)) {
+                    public Runner runnerForClass(Class<?> testClass) throws Throwable {
+                        if (ComplianceSuiteTest.class.isAssignableFrom(testClass)) {
                             Class<? extends ComplianceSuiteTest> cst =
                                     (Class<? extends ComplianceSuiteTest>) testClass;
                             return new ComplianceSuiteTestRunner(executor, parent, cst);

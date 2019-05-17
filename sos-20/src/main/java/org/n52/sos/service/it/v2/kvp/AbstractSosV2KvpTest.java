@@ -14,12 +14,9 @@
  */
 package org.n52.sos.service.it.v2.kvp;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueException;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidVersionParameterValueException;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueException;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.missingVersionParameterValueException;
+import org.hamcrest.Matchers;
+import org.junit.Assert;
+import org.n52.sos.service.it.v2.ExceptionMatchers;
 
 import org.junit.Test;
 import org.n52.sos.service.it.ServiceConstants;
@@ -34,75 +31,58 @@ import org.w3c.dom.Node;
  * @since 4.0.0
  *
  */
-public abstract class AbstractSosV2KvpTest
-        extends AbstractKvpComplianceTest
-        implements ServiceConstants {
+public abstract class AbstractSosV2KvpTest extends AbstractKvpComplianceTest implements ServiceConstants {
     public static final String VERSION = ServiceConstants.V20;
+
     public static final String SERVICE = ServiceConstants.SOS;
+
+    private static final String INVALID_VERSION = "1.2.3";
 
     public abstract String getRequest();
 
     @Test
     @Override
     public void missingServiceParameter() {
-        Node node = kvp()
-                .query(REQUEST_PARAMETER, getRequest())
-                .query(VERSION_PARAMETER, VERSION)
-                .response().asNode();
-        assertThat(node, is(missingServiceParameterValueException()));
+        Node node = kvp().query(REQUEST_PARAMETER, getRequest()).query(VERSION_PARAMETER, VERSION).response().asNode();
+        Assert.assertThat(node, Matchers.is(ExceptionMatchers.missingServiceParameterValueException()));
     }
 
     @Test
     @Override
     public void emptyServiceParameter() {
-        Node node = kvp()
-                .query(REQUEST_PARAMETER, getRequest())
-                .query(SERVICE_PARAMETER, "")
-                .query(VERSION_PARAMETER, VERSION)
-                .response().asNode();
-        assertThat(node, is(missingServiceParameterValueException()));
+        Node node = kvp().query(REQUEST_PARAMETER, getRequest()).query(SERVICE_PARAMETER, "")
+                .query(VERSION_PARAMETER, VERSION).response().asNode();
+        Assert.assertThat(node, Matchers.is(ExceptionMatchers.missingServiceParameterValueException()));
     }
 
     @Test
     @Override
     public void invalidServiceParameter() {
-        Node node = kvp()
-                .query(REQUEST_PARAMETER, getRequest())
-                .query(SERVICE_PARAMETER, "INVALID")
-                .query(VERSION_PARAMETER, VERSION)
-                .response().asNode();
-        assertThat(node, is(invalidServiceParameterValueException("INVALID")));
+        Node node = kvp().query(REQUEST_PARAMETER, getRequest()).query(SERVICE_PARAMETER, INVALID)
+                .query(VERSION_PARAMETER, VERSION).response().asNode();
+        Assert.assertThat(node, Matchers.is(ExceptionMatchers.invalidServiceParameterValueException(INVALID)));
     }
 
     @Test
     @Override
     public void missingVersionParameter() {
-        Node node = kvp()
-                .query(REQUEST_PARAMETER, getRequest())
-                .query(SERVICE_PARAMETER, SERVICE)
-                .response().asNode();
-        assertThat(node, is(missingVersionParameterValueException()));
+        Node node = kvp().query(REQUEST_PARAMETER, getRequest()).query(SERVICE_PARAMETER, SERVICE).response().asNode();
+        Assert.assertThat(node, Matchers.is(ExceptionMatchers.missingVersionParameterValueException()));
     }
 
     @Test
     @Override
     public void emptyVersionParameter() {
-        Node node = kvp()
-                .query(REQUEST_PARAMETER, getRequest())
-                .query(SERVICE_PARAMETER, SERVICE)
-                .query(VERSION_PARAMETER, "")
-                .response().asNode();
-        assertThat(node, is(missingVersionParameterValueException()));
+        Node node = kvp().query(REQUEST_PARAMETER, getRequest()).query(SERVICE_PARAMETER, SERVICE)
+                .query(VERSION_PARAMETER, "").response().asNode();
+        Assert.assertThat(node, Matchers.is(ExceptionMatchers.missingVersionParameterValueException()));
     }
 
     @Test
     @Override
     public void invalidVersionParameter() {
-        Node node = kvp()
-                .query(REQUEST_PARAMETER, getRequest())
-                .query(SERVICE_PARAMETER, SERVICE)
-                .query(VERSION_PARAMETER, "1.2.3")
-                .response().asNode();
-        assertThat(node, is(invalidVersionParameterValueException("1.2.3")));
+        Node node = kvp().query(REQUEST_PARAMETER, getRequest()).query(SERVICE_PARAMETER, SERVICE)
+                .query(VERSION_PARAMETER, INVALID_VERSION).response().asNode();
+        Assert.assertThat(node, Matchers.is(ExceptionMatchers.invalidVersionParameterValueException(INVALID_VERSION)));
     }
 }

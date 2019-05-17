@@ -27,6 +27,7 @@ import org.w3c.dom.Node;
  */
 public class XPath {
     private final String path;
+
     private final NamespaceContext ctx;
 
     public XPath(String path, NamespaceContext ctx) {

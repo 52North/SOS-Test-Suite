@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
@@ -34,15 +34,17 @@ import org.springframework.mock.web.MockHttpServletRequest;
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
 class MockHttpClient implements Client {
-    private ServletContext context = null;
-    private final Map<String, Set<String>> headers =
-            new HashMap<String, Set<String>>(5);
-    private final Map<String, Set<String>> query =
-            new HashMap<String, Set<String>>(5);
+    private final Map<String, Set<String>> headers = new HashMap<String, Set<String>>(5);
+
+    private final Map<String, Set<String>> query = new HashMap<String, Set<String>>(5);
+
     private final HttpServlet servlet;
-    private String method = null;
-    private String path = null;
-    private String content = null;
+
+    private String method;
+
+    private String path;
+
+    private String content;
 
     MockHttpClient(HttpServlet servlet, String method, String path) {
         this.servlet = servlet;
@@ -103,21 +105,20 @@ class MockHttpClient implements Client {
 
     private MockHttpServletRequest build() {
         try {
-            final MockHttpServletRequest req =
-                    new MockHttpServletRequest(context);
+            final MockHttpServletRequest req = new MockHttpServletRequest(null);
             req.setMethod(method);
-            for (String header : headers.keySet()) {
-                for (String value : headers.get(header)) {
-                    req.addHeader(header, value);
+            for (Entry<String, Set<String>> entry : headers.entrySet()) {
+                for (String value : entry.getValue()) {
+                    req.addHeader(entry.getKey(), value);
                 }
             }
             final StringBuilder queryString = new StringBuilder();
             if (query != null && !query.isEmpty()) {
                 boolean first = true;
-                for (String key : query.keySet()) {
-                    final Set<String> values = query.get(key);
-                    req.addParameter(key, values.toArray(new String[values
-                            .size()]));
+                for (Entry<String, Set<String>> entry : query.entrySet()) {
+                    String key = entry.getKey();
+                    Set<String> values = entry.getValue();
+                    req.addParameter(key, values.toArray(new String[values.size()]));
                     if (first) {
                         queryString.append("?");
                         first = false;
@@ -131,6 +132,24 @@ class MockHttpClient implements Client {
                         queryString.append(",").append(i.next());
                     }
                 }
+
+                // for (String key : query.keySet()) {
+                // final Set<String> values = query.get(key);
+                // req.addParameter(key, values.toArray(new String[values
+                // .size()]));
+                // if (first) {
+                // queryString.append("?");
+                // first = false;
+                // } else {
+                // queryString.append("&");
+                // }
+                // queryString.append(key).append("=");
+                // Iterator<String> i = values.iterator();
+                // queryString.append(i.next());
+                // while (i.hasNext()) {
+                // queryString.append(",").append(i.next());
+                // }
+                // }
                 req.setQueryString(queryString.toString());
             }
             req.setRequestURI(path + queryString.toString());
@@ -139,8 +158,7 @@ class MockHttpClient implements Client {
             }
             req.setPathInfo(path);
             if (content != null) {
-                req.setContent(content
-                        .getBytes(MockHttpExecutor.ENCODING));
+                req.setContent(content.getBytes(MockHttpExecutor.ENCODING));
             }
             return req;
         } catch (UnsupportedEncodingException ex) {

@@ -37,23 +37,18 @@ import net.opengis.swes.x20.InsertSensorType;
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
-public class RequestBuilder {
+public final class RequestBuilder {
     private RequestBuilder() {
     }
 
     public static InsertSensorDocument getInsertSensorMinimalDocument() {
-        final InsertSensorDocument insertSensorDocument =
-                InsertSensorDocument.Factory.newInstance();
-        final InsertSensorType insertSensorType = insertSensorDocument
-                .addNewInsertSensor();
-        insertSensorType
-                .setProcedureDescriptionFormat(SensorMLConstants.SENSORML_OUTPUT_FORMAT_URL);
-        final SensorMLDocument sensorMLDocument = SensorMLDocument.Factory
-                .newInstance();
+        final InsertSensorDocument insertSensorDocument = InsertSensorDocument.Factory.newInstance();
+        final InsertSensorType insertSensorType = insertSensorDocument.addNewInsertSensor();
+        insertSensorType.setProcedureDescriptionFormat(SensorMLConstants.SENSORML_OUTPUT_FORMAT_URL);
+        final SensorMLDocument sensorMLDocument = SensorMLDocument.Factory.newInstance();
         final SensorML sensorML = sensorMLDocument.addNewSensorML();
         sensorML.setVersion(SensorMLConstants.VERSION_V101);
-        final SystemDocument systemDocument = SystemDocument.Factory
-                .newInstance();
+        final SystemDocument systemDocument = SystemDocument.Factory.newInstance();
         systemDocument.addNewSystem();
         sensorML.addNewMember().set(systemDocument);
         insertSensorType.addNewProcedureDescription().set(sensorMLDocument);
@@ -62,29 +57,22 @@ public class RequestBuilder {
     }
 
     public static InsertObservationDocument getInsertObservationMinimalDocument() {
-        final InsertObservationDocument insertObservationDocument =
-                InsertObservationDocument.Factory.newInstance();
-        final InsertObservationType insertObservationType =
-                insertObservationDocument.addNewInsertObservation();
+        final InsertObservationDocument insertObservationDocument = InsertObservationDocument.Factory.newInstance();
+        final InsertObservationType insertObservationType = insertObservationDocument.addNewInsertObservation();
         insertObservationType.addOffering("offering");
-        final OMObservationType observation = insertObservationType
-                .addNewObservation().addNewOMObservation();
+        final OMObservationType observation = insertObservationType.addNewObservation().addNewOMObservation();
         observation.setId("id");
-        final TimeInstantDocument timeInstantDocument =
-                TimeInstantDocument.Factory.newInstance();
-        final TimeInstantType timeInstantType = timeInstantDocument
-                .addNewTimeInstant();
+        final TimeInstantDocument timeInstantDocument = TimeInstantDocument.Factory.newInstance();
+        final TimeInstantType timeInstantType = timeInstantDocument.addNewTimeInstant();
         timeInstantType.setId("phenomenonTime");
-        timeInstantType.addNewTimePosition()
-                .setObjectValue("2000-01-01T00:00:00Z");
+        timeInstantType.addNewTimePosition().setObjectValue("2000-01-01T00:00:00Z");
         observation.addNewPhenomenonTime().set(timeInstantDocument);
         observation.addNewResultTime().setHref("#phenomenonTime");
         observation.addNewProcedure();
         observation.addNewObservedProperty();
         observation.addNewFeatureOfInterest().setHref("featureOfInterest");
         XmlObject result = observation.addNewResult();
-        result = result
-                .substitute(new QName(OmConstants.NS_OM_2, OmConstants.EN_RESULT), XmlString.type);
+        result = result.substitute(new QName(OmConstants.NS_OM_2, OmConstants.EN_RESULT), XmlString.type);
         result.set(XmlString.Factory.newValue("value"));
         return insertObservationDocument;
     }

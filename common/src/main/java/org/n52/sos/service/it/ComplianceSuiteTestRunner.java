@@ -33,13 +33,13 @@ import org.junit.runners.model.TestClass;
  */
 public class ComplianceSuiteTestRunner extends BlockJUnit4ClassRunner {
     private final ComplianceSuite parent;
+
     private final TestClass parentClass;
+
     private final RequestExecutor executor;
 
-    public ComplianceSuiteTestRunner(RequestExecutor executor,
-                                     ComplianceSuite parent,
-                                     Class<? extends ComplianceSuiteTest> klass)
-            throws InitializationError {
+    public ComplianceSuiteTestRunner(RequestExecutor executor, ComplianceSuite parent,
+            Class<? extends ComplianceSuiteTest> klass) throws InitializationError {
         super(klass);
         this.parent = parent;
         this.parentClass = new TestClass(parent.getClass());
@@ -55,10 +55,8 @@ public class ComplianceSuiteTestRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected List<TestRule> getTestRules(Object target) {
-        List<TestRule> rules = parentClass.getAnnotatedMethodValues(
-                parent, Rule.class, TestRule.class);
-        rules.addAll(parentClass.getAnnotatedFieldValues(
-                parent, Rule.class, TestRule.class));
+        List<TestRule> rules = parentClass.getAnnotatedMethodValues(parent, Rule.class, TestRule.class);
+        rules.addAll(parentClass.getAnnotatedFieldValues(parent, Rule.class, TestRule.class));
         rules.addAll(super.getTestRules(target));
         rules.add(new RequestExecutorRule());
         return rules;

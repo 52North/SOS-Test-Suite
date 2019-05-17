@@ -32,7 +32,7 @@ public class GetObservationByIdTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        GetObservationByIdDocument getObservationByIdDocument = getRequest("observation");
+        GetObservationByIdDocument getObservationByIdDocument = getRequest(OBSERVATION_PARAMETER);
         addVersionParameter(getObservationByIdDocument.getGetObservationById());
         missingServiceParameter(getObservationByIdDocument.getGetObservationById(), getObservationByIdDocument);
     }
@@ -40,7 +40,7 @@ public class GetObservationByIdTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        GetObservationByIdDocument getObservationByIdDocument = getRequest("observation");
+        GetObservationByIdDocument getObservationByIdDocument = getRequest(OBSERVATION_PARAMETER);
         addVersionParameter(getObservationByIdDocument.getGetObservationById());
         emptyServiceParameter(getObservationByIdDocument.getGetObservationById(), getObservationByIdDocument);
     }
@@ -48,7 +48,7 @@ public class GetObservationByIdTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void invalidServiceParameter() throws XmlException {
-        GetObservationByIdDocument getObservationByIdDocument = getRequest("observation");
+        GetObservationByIdDocument getObservationByIdDocument = getRequest(OBSERVATION_PARAMETER);
         addVersionParameter(getObservationByIdDocument.getGetObservationById());
         invalidServiceParameter(getObservationByIdDocument.getGetObservationById(), getObservationByIdDocument);
     }
@@ -56,7 +56,7 @@ public class GetObservationByIdTest extends AbstractSosV2SoapTest {
     protected GetObservationByIdDocument getRequest(String observation) {
         GetObservationByIdDocument getObservationByIdDocument = GetObservationByIdDocument.Factory.newInstance();
         GetObservationByIdType getObservationByIdType = getObservationByIdDocument.addNewGetObservationById();
-        getObservationByIdType.addObservation("observation");
+        getObservationByIdType.addObservation(OBSERVATION_PARAMETER);
         return getObservationByIdDocument;
     }
 }

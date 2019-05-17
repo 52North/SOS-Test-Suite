@@ -14,7 +14,6 @@
  */
 package org.n52.sos.service.it.v2.kvp;
 
-
 /**
  * Test for KVP SOS 2.0 GetObservation request.
  *

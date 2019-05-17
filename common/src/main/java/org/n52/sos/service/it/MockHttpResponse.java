@@ -14,10 +14,6 @@
  */
 package org.n52.sos.service.it;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +24,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.w3c.dom.Element;
@@ -38,17 +35,15 @@ import org.xml.sax.SAXException;
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
-public class MockHttpResponse extends MockHttpServletResponse
-        implements Response {
-    private final DocumentBuilderFactory factory =
-            DocumentBuilderFactory.newInstance();
+public class MockHttpResponse extends MockHttpServletResponse implements Response {
+    private final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
     @Override
     public InputStream asInputStream() {
         byte[] response = getContentAsByteArray();
-        Assert.assertThat(getStatus(), is(not(503)));
-        Assert.assertThat(response, is(not(nullValue())));
-        Assert.assertThat(response.length, is(not(0)));
+        Assert.assertThat(getStatus(), Matchers.is(Matchers.not(503)));
+        Assert.assertThat(response, Matchers.is(Matchers.not(Matchers.nullValue())));
+        Assert.assertThat(response.length, Matchers.is(Matchers.not(0)));
         return new ByteArrayInputStream(response);
     }
 
@@ -68,8 +63,7 @@ public class MockHttpResponse extends MockHttpServletResponse
         InputStream in = null;
         try {
             in = asInputStream();
-            return this.factory.newDocumentBuilder()
-                    .parse(in).getDocumentElement();
+            return this.factory.newDocumentBuilder().parse(in).getDocumentElement();
         } catch (ParserConfigurationException ex) {
             // FIXME message
             throw new AssertionError();
@@ -84,6 +78,7 @@ public class MockHttpResponse extends MockHttpServletResponse
                 try {
                     in.close();
                 } catch (IOException e) {
+                    // do nothing
                 }
             }
         }

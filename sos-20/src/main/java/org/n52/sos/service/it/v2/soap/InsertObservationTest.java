@@ -25,7 +25,7 @@ import net.opengis.sos.x20.InsertObservationDocument;
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
- * J&uuml;rrens</a>
+ *         J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */
@@ -36,8 +36,7 @@ public class InsertObservationTest extends AbstractSosV2SoapTest {
         final InsertObservationDocument insertObservationDocument =
                 RequestBuilder.getInsertObservationMinimalDocument();
         addVersionParameter(insertObservationDocument.getInsertObservation());
-        missingServiceParameter(insertObservationDocument.getInsertObservation(),
-                                insertObservationDocument);
+        missingServiceParameter(insertObservationDocument.getInsertObservation(), insertObservationDocument);
     }
 
     @Override
@@ -46,8 +45,7 @@ public class InsertObservationTest extends AbstractSosV2SoapTest {
         final InsertObservationDocument insertObservationDocument =
                 RequestBuilder.getInsertObservationMinimalDocument();
         addVersionParameter(insertObservationDocument.getInsertObservation());
-        emptyServiceParameter(insertObservationDocument.getInsertObservation(),
-                              insertObservationDocument);
+        emptyServiceParameter(insertObservationDocument.getInsertObservation(), insertObservationDocument);
     }
 
     @Override
@@ -56,7 +54,6 @@ public class InsertObservationTest extends AbstractSosV2SoapTest {
         final InsertObservationDocument insertObservationDocument =
                 RequestBuilder.getInsertObservationMinimalDocument();
         addVersionParameter(insertObservationDocument.getInsertObservation());
-        invalidServiceParameter(insertObservationDocument.getInsertObservation(),
-                                insertObservationDocument);
+        invalidServiceParameter(insertObservationDocument.getInsertObservation(), insertObservationDocument);
     }
 }

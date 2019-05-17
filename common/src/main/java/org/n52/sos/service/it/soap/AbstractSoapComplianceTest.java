@@ -24,7 +24,7 @@ import org.w3.x2003.x05.soapEnvelope.EnvelopeDocument;
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
- * J&uuml;rrens</a>
+ *         J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  *
  * @since 4.0.0
@@ -39,11 +39,7 @@ public abstract class AbstractSoapComplianceTest extends AbstractComplianceSuite
     }
 
     protected Response soap(XmlObject xml) {
-        return getExecutor()
-                .soap()
-                .accept(APPLICATION_SOAP_XML)
-                .contentType(APPLICATION_SOAP_XML)
-                .entity(envelope(xml).xmlText())
-                .response();
+        return getExecutor().soap().accept(APPLICATION_SOAP_XML).contentType(APPLICATION_SOAP_XML)
+                .entity(envelope(xml).xmlText()).response();
     }
 }

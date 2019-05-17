@@ -20,7 +20,6 @@ import org.junit.Test;
 import net.opengis.sensorML.x101.SensorMLDocument;
 import net.opengis.sensorML.x101.SensorMLDocument.SensorML;
 import net.opengis.sensorML.x101.SystemDocument;
-import net.opengis.sensorML.x101.SystemType;
 import net.opengis.swes.x20.UpdateSensorDescriptionDocument;
 import net.opengis.swes.x20.UpdateSensorDescriptionType;
 
@@ -35,56 +34,42 @@ public class UpdateSensorDescriptionTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        UpdateSensorDescriptionDocument updateSensorDescriptionDocument =
-                getMinimalRequest();
-        addVersionParameter(updateSensorDescriptionDocument
-                .getUpdateSensorDescription());
-        missingServiceParameter(updateSensorDescriptionDocument
-                .getUpdateSensorDescription(),
-                                updateSensorDescriptionDocument);
+        UpdateSensorDescriptionDocument updateSensorDescriptionDocument = getMinimalRequest();
+        addVersionParameter(updateSensorDescriptionDocument.getUpdateSensorDescription());
+        missingServiceParameter(updateSensorDescriptionDocument.getUpdateSensorDescription(),
+                updateSensorDescriptionDocument);
     }
 
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        UpdateSensorDescriptionDocument updateSensorDescriptionDocument =
-                getMinimalRequest();
-        addVersionParameter(updateSensorDescriptionDocument
-                .getUpdateSensorDescription());
-        emptyServiceParameter(updateSensorDescriptionDocument
-                .getUpdateSensorDescription(),
-                              updateSensorDescriptionDocument);
+        UpdateSensorDescriptionDocument updateSensorDescriptionDocument = getMinimalRequest();
+        addVersionParameter(updateSensorDescriptionDocument.getUpdateSensorDescription());
+        emptyServiceParameter(updateSensorDescriptionDocument.getUpdateSensorDescription(),
+                updateSensorDescriptionDocument);
     }
 
     @Test
     @Override
     public void invalidServiceParameter() throws XmlException {
-        UpdateSensorDescriptionDocument updateSensorDescriptionDocument =
-                getMinimalRequest();
-        addVersionParameter(updateSensorDescriptionDocument
-                .getUpdateSensorDescription());
-        invalidServiceParameter(updateSensorDescriptionDocument
-                .getUpdateSensorDescription(),
-                                updateSensorDescriptionDocument);
+        UpdateSensorDescriptionDocument updateSensorDescriptionDocument = getMinimalRequest();
+        addVersionParameter(updateSensorDescriptionDocument.getUpdateSensorDescription());
+        invalidServiceParameter(updateSensorDescriptionDocument.getUpdateSensorDescription(),
+                updateSensorDescriptionDocument);
     }
 
     protected UpdateSensorDescriptionDocument getMinimalRequest() {
-        UpdateSensorDescriptionDocument insertSensorDocument =
-                UpdateSensorDescriptionDocument.Factory.newInstance();
-        UpdateSensorDescriptionType updateSensorDescriptionType =
-                insertSensorDocument.addNewUpdateSensorDescription();
+        UpdateSensorDescriptionDocument insertSensorDocument = UpdateSensorDescriptionDocument.Factory.newInstance();
+        UpdateSensorDescriptionType updateSensorDescriptionType = insertSensorDocument.addNewUpdateSensorDescription();
         updateSensorDescriptionType.setProcedure("procedure");
-        updateSensorDescriptionType
-                .setProcedureDescriptionFormat("http://www.opengis.net/sensorML/1.0.1");
-        SensorMLDocument sensorMLDocument = SensorMLDocument.Factory
-                .newInstance();
+        updateSensorDescriptionType.setProcedureDescriptionFormat("http://www.opengis.net/sensorML/1.0.1");
+        SensorMLDocument sensorMLDocument = SensorMLDocument.Factory.newInstance();
         SensorML sensorML = sensorMLDocument.addNewSensorML();
         sensorML.setVersion("1.0.1");
         SystemDocument systemDocument = SystemDocument.Factory.newInstance();
-        SystemType systemType = systemDocument.addNewSystem();
+        systemDocument.addNewSystem();
         sensorML.addNewMember().set(systemDocument);
-        updateSensorDescriptionType.addNewDescription()
-                .addNewSensorDescription().addNewData().set(sensorMLDocument);
+        updateSensorDescriptionType.addNewDescription().addNewSensorDescription().addNewData().set(sensorMLDocument);
 
         return insertSensorDocument;
     }

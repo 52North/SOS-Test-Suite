@@ -32,7 +32,8 @@ public class GetResultTemplateTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void missingServiceParameter() throws XmlException {
-        GetResultTemplateDocument getResultTemplateDocument = getRequest("offering", "observedProperty");
+        GetResultTemplateDocument getResultTemplateDocument =
+                getRequest(OFFERING_PARAMETER, OBSERVED_PROPERTY_PARAMETER);
         addVersionParameter(getResultTemplateDocument.getGetResultTemplate());
         missingServiceParameter(getResultTemplateDocument.getGetResultTemplate(), getResultTemplateDocument);
     }
@@ -40,7 +41,8 @@ public class GetResultTemplateTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void emptyServiceParameter() throws XmlException {
-        GetResultTemplateDocument getResultTemplateDocument = getRequest("offering", "observedProperty");
+        GetResultTemplateDocument getResultTemplateDocument =
+                getRequest(OFFERING_PARAMETER, OBSERVED_PROPERTY_PARAMETER);
         addVersionParameter(getResultTemplateDocument.getGetResultTemplate());
         emptyServiceParameter(getResultTemplateDocument.getGetResultTemplate(), getResultTemplateDocument);
     }
@@ -48,7 +50,8 @@ public class GetResultTemplateTest extends AbstractSosV2SoapTest {
     @Override
     @Test
     public void invalidServiceParameter() throws XmlException {
-        GetResultTemplateDocument getResultTemplateDocument = getRequest("offering", "observedProperty");
+        GetResultTemplateDocument getResultTemplateDocument =
+                getRequest(OFFERING_PARAMETER, OBSERVED_PROPERTY_PARAMETER);
         addVersionParameter(getResultTemplateDocument.getGetResultTemplate());
         invalidServiceParameter(getResultTemplateDocument.getGetResultTemplate(), getResultTemplateDocument);
     }

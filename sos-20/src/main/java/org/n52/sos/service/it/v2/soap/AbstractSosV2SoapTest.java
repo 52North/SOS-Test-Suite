@@ -14,10 +14,8 @@
  */
 package org.n52.sos.service.it.v2.soap;
 
-import static org.hamcrest.Matchers.is;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidRequestMissingParameterExceptionFault;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.invalidServiceParameterValueExceptionFault;
-import static org.n52.sos.service.it.v2.ExceptionMatchers.missingServiceParameterValueExceptionFault;
+import org.hamcrest.Matchers;
+import org.n52.sos.service.it.v2.ExceptionMatchers;
 
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
@@ -37,51 +35,48 @@ import net.opengis.swes.x20.ExtensibleRequestType;
  */
 public abstract class AbstractSosV2SoapTest extends AbstractSoapComplianceTest {
     public static final String SERVICE = ServiceConstants.SOS;
+
     public static final String VERSION = ServiceConstants.V20;
+
     public static final String SERVICE_PARAMETER = "service";
 
-    protected void addServiceParameter(
-            ExtensibleRequestType extensibleRequestType) {
+    protected void addServiceParameter(ExtensibleRequestType extensibleRequestType) {
         extensibleRequestType.setService(SERVICE);
     }
 
-    protected void addVersionParameter(
-            ExtensibleRequestType extensibleRequestType) {
+    protected void addVersionParameter(ExtensibleRequestType extensibleRequestType) {
         extensibleRequestType.setVersion(VERSION);
     }
 
-    public void missingServiceParameter(ExtensibleRequestType req,
-                                        XmlObject xmlDocument) {
+    @Test
+    public abstract void missingServiceParameter() throws XmlException;
+
+    public void missingServiceParameter(ExtensibleRequestType req, XmlObject xmlDocument) {
         Response res = soap(xmlDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
         getErrors().checkThat(res.asNode(),
-                              is(invalidRequestMissingParameterExceptionFault(SERVICE_PARAMETER)));
-    }
-
-    public void emptyServiceParameter(ExtensibleRequestType req,
-                                      XmlObject xmlDocument) {
-        req.setService("");
-        Response res = soap(xmlDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
-        getErrors()
-                .checkThat(res.asNode(), is(missingServiceParameterValueExceptionFault()));
-    }
-
-    public void invalidServiceParameter(ExtensibleRequestType req,
-                                        XmlObject xmlDocument) {
-        req.setService("INVALID");
-        Response res = soap(xmlDocument);
-        getErrors().checkThat(res.getStatus(), is(400));
-        getErrors()
-                .checkThat(res.asNode(), is(invalidServiceParameterValueExceptionFault("INVALID")));
+                Matchers.is(ExceptionMatchers.invalidRequestMissingParameterExceptionFault(SERVICE_PARAMETER)));
     }
 
     @Test
     public abstract void emptyServiceParameter() throws XmlException;
 
-    @Test
-    public abstract void missingServiceParameter() throws XmlException;
+    public void emptyServiceParameter(ExtensibleRequestType req, XmlObject xmlDocument) {
+        req.setService("");
+        Response res = soap(xmlDocument);
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
+        getErrors().checkThat(res.asNode(),
+                Matchers.is(ExceptionMatchers.missingServiceParameterValueExceptionFault()));
+    }
 
     @Test
     public abstract void invalidServiceParameter() throws XmlException;
+
+    public void invalidServiceParameter(ExtensibleRequestType req, XmlObject xmlDocument) {
+        req.setService(INVALID);
+        Response res = soap(xmlDocument);
+        getErrors().checkThat(res.getStatus(), Matchers.is(400));
+        getErrors().checkThat(res.asNode(),
+                Matchers.is(ExceptionMatchers.invalidServiceParameterValueExceptionFault(INVALID)));
+    }
 }

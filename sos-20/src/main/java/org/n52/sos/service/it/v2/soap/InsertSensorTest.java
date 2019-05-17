@@ -25,7 +25,7 @@ import net.opengis.swes.x20.InsertSensorDocument;
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @author <a href="mailto:e.h.juerrens@52north.org">Eike Hinderk
- * J&uuml;rrens</a>
+ *         J&uuml;rrens</a>
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 4.0.0
  */
@@ -33,30 +33,24 @@ public class InsertSensorTest extends AbstractSosV2SoapTest {
     @Test
     @Override
     public void missingServiceParameter() throws XmlException {
-        final InsertSensorDocument insertSensorDocument =
-                RequestBuilder.getInsertSensorMinimalDocument();
+        final InsertSensorDocument insertSensorDocument = RequestBuilder.getInsertSensorMinimalDocument();
         addVersionParameter(insertSensorDocument.getInsertSensor());
-        missingServiceParameter(insertSensorDocument.getInsertSensor(),
-                                insertSensorDocument);
+        missingServiceParameter(insertSensorDocument.getInsertSensor(), insertSensorDocument);
     }
 
     @Test
     @Override
     public void emptyServiceParameter() throws XmlException {
-        final InsertSensorDocument insertSensorDocument =
-                RequestBuilder.getInsertSensorMinimalDocument();
+        final InsertSensorDocument insertSensorDocument = RequestBuilder.getInsertSensorMinimalDocument();
         addVersionParameter(insertSensorDocument.getInsertSensor());
-        emptyServiceParameter(insertSensorDocument.getInsertSensor(),
-                              insertSensorDocument);
+        emptyServiceParameter(insertSensorDocument.getInsertSensor(), insertSensorDocument);
     }
 
     @Test
     @Override
     public void invalidServiceParameter() throws XmlException {
-        final InsertSensorDocument insertSensorDocument =
-                RequestBuilder.getInsertSensorMinimalDocument();
+        final InsertSensorDocument insertSensorDocument = RequestBuilder.getInsertSensorMinimalDocument();
         addVersionParameter(insertSensorDocument.getInsertSensor());
-        invalidServiceParameter(insertSensorDocument.getInsertSensor(),
-                                insertSensorDocument);
+        invalidServiceParameter(insertSensorDocument.getInsertSensor(), insertSensorDocument);
     }
 }

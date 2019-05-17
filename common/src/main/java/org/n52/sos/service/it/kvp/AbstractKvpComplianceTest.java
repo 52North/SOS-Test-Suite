@@ -23,10 +23,11 @@ import org.n52.sos.service.it.Client;
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
-public abstract class AbstractKvpComplianceTest
-        extends AbstractComplianceSuiteTest {
+public abstract class AbstractKvpComplianceTest extends AbstractComplianceSuiteTest {
     public static final String REQUEST_PARAMETER = "request";
+
     public static final String VERSION_PARAMETER = "version";
+
     public static final String SERVICE_PARAMETER = "service";
 
     protected Client kvp() {
