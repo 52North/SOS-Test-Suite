@@ -25,18 +25,25 @@
     </ciManagement>
     <scm>
         <url>http://github.com/52North/SOS-Test-Suite</url>
-        <connection>scm:git:ssh://github.com/52North/SOS-Test-Suite.git</connection>
-        <developerConnection>scm:git:git+ssh://git@github.com/52North/SOS-Test-Suite.git</developerConnection>
+        <connection>scm:git:https://github.com/52North/SOS-Test-Suite.git</connection>
+        <developerConnection>scm:git:https:://git@github.com/52North/SOS-Test-Suite.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issue Management</system>
         <url>https://github.com/52North/SOS-Test-Suite/issues</url>
     </issueManagement>
     <distributionManagement>
-        <site>
-            <id>github</id>
-            <url>gitsite:git@github.com/52North/SOS-Test-Suite.git</url>
-        </site>
+        <repository>
+            <id>n52-releases-dist</id>
+            <name>repository for 52North releases</name>
+            <url>dav:https://52north.org/maven/repo/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>n52-snapshots-dist</id>
+            <name>repository for 52North snapshots</name>
+            <url>dav:https://52north.org/maven/repo/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
     <licenses>
         <license>
