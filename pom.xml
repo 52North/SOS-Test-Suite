@@ -53,7 +53,7 @@
         </license>
     </licenses>
     <properties>
-        <xml.common.version>2.6.1</xml.common.version>
+        <xml.common.version>2.7.0</xml.common.version>
         <spring.version>5.1.6.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <logback.version>1.2.3</logback.version>
