@@ -3,19 +3,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.n52.sensorweb.sos</groupId>
+        <groupId>org.n52.sensorweb-server.sos</groupId>
         <artifactId>test-suite</artifactId>
-        <version>2.0.0-M2</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>test-suite-common</artifactId>
     <name>52North SOS Integration and Compliance Common</name>
     <packaging>jar</packaging>
     <dependencies>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -35,6 +31,10 @@
         <dependency>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
         </dependency>
         <dependency>
             <groupId>xml-apis</groupId>
