@@ -33,6 +33,10 @@
             <artifactId>xmlbeans</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+        </dependency>
+        <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>
         </dependency>
@@ -40,10 +44,6 @@
             <groupId>stax</groupId>
             <artifactId>stax-api</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.n52.arctic-sea</groupId>
-            <artifactId>iceland</artifactId>
         </dependency>
     </dependencies>
 </project>

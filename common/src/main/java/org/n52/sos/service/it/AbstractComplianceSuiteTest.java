@@ -17,11 +17,14 @@ package org.n52.sos.service.it;
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * TODO JavaDoc
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractComplianceSuiteTest implements ComplianceSuiteTest {
     public static final String PROCEDURE_PARAMETER = "procedure";
 

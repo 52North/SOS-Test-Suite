@@ -26,11 +26,14 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * TODO JavaDoc
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP2"})
 public class ComplianceSuiteTestRunner extends BlockJUnit4ClassRunner {
     private final ComplianceSuite parent;
 

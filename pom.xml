@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>14</version>
+        <version>24</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.n52.sensorweb.sos</groupId>
@@ -19,10 +19,6 @@
         <!-- <module>sos-100</module> -->
         <module>sos-20</module>
     </modules>
-    <ciManagement>
-        <system>travis</system>
-        <url>https://travis-ci.org/52North/SOS-Test-Suite</url>
-    </ciManagement>
     <scm>
         <url>http://github.com/52North/SOS-Test-Suite</url>
         <connection>scm:git:https://github.com/52North/SOS-Test-Suite.git</connection>
@@ -33,18 +29,6 @@
         <system>GitHub Issue Management</system>
         <url>https://github.com/52North/SOS-Test-Suite/issues</url>
     </issueManagement>
-    <distributionManagement>
-        <repository>
-            <id>n52-releases-dist</id>
-            <name>repository for 52North releases</name>
-            <url>dav:https://52north.org/maven/repo/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>n52-snapshots-dist</id>
-            <name>repository for 52North snapshots</name>
-            <url>dav:https://52north.org/maven/repo/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
     <licenses>
         <license>
             <name>Eclipse Public License 1.0</name>
@@ -53,12 +37,12 @@
         </license>
     </licenses>
     <properties>
-        <xml.common.version>2.6.1</xml.common.version>
-        <spring.version>5.1.6.RELEASE</spring.version>
+        <xml.common.version>2.7.0</xml.common.version>
+        <spring.version>5.3.20</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <logback.version>1.2.3</logback.version>
-        <slf4j.version>1.7.26</slf4j.version>
-        <arctic-sea.version>6.0.0</arctic-sea.version>
+        <logback.version>1.2.11</logback.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <arctic-sea.version>9.5.3</arctic-sea.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -134,7 +118,12 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>4.0.1</version>
-                <scope>compile</scope>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>4.7.0</version>
             </dependency>
 
             <!-- XML bindings -->
@@ -391,18 +380,12 @@
         <repository>
             <id>n52-releases</id>
             <name>52n Releases</name>
-            <url>http://52north.org/maven/repo/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <url>https://52north.org/maven/repo/releases</url>
         </repository>
         <repository>
-            <id>n52-snapshots</id>
-            <name>52n Snapshots</name>
-            <url>http://52north.org/maven/repo/snapshots</url>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Maven Central Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <releases>
                 <enabled>false</enabled>
             </releases>

@@ -19,7 +19,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 
 import org.junit.rules.ExternalResource;
-import org.n52.iceland.service.Service;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 
@@ -44,10 +43,10 @@ public abstract class MockHttpExecutor extends ExternalResource implements Reque
         this.servletFactory = servletFactory;
     }
 
-    public MockHttpExecutor(final Class<? extends Service> klass) {
+    public MockHttpExecutor(final Class<? extends HttpServlet> klass) {
         this.servletFactory = new ServletFactory() {
             @Override
-            public Service create() {
+            public HttpServlet create() {
                 try {
                     return klass.newInstance();
                 } catch (InstantiationException ex) {
