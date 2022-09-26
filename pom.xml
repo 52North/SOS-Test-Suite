@@ -41,7 +41,7 @@
         <spring.version>5.3.20</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <logback.version>1.2.11</logback.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j.version>2.0.2</slf4j.version>
         <arctic-sea.version>9.5.3</arctic-sea.version>
     </properties>
     <dependencyManagement>
